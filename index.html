@@ -55,7 +55,7 @@
             JSON.stringify({
               //
               access_token: __gitee_access_token,
-              content: btoa("init"),
+              content: btoa(unescape(encodeURIComponent('init'))),
               message: "insert-" + this.now(),
             })
           );
@@ -81,7 +81,7 @@
             JSON.stringify({
               //
               access_token: __gitee_access_token,
-              content: btoa(encodeURIComponent(content)),
+              content: btoa(unescape(encodeURIComponent(content))),
               message: "update-" + this.now(),
               sha: res.sha,
             })
@@ -141,7 +141,7 @@
 
           $("#my_submit").attr("disabled", "disabled");
         } else {
-          const data = decodeURIComponent(atob(res.content));
+          const data = decodeURIComponent(escape(atob(res.content)));
           $("#my_textarea").val(data);
           $("#my_submit").removeAttr("disabled");
         }
