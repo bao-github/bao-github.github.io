@@ -144,6 +144,11 @@
         } else {
           const data = decodeURIComponent(escape(atob(res.content)));
           $("#my_textarea").val(data);
+          let temp = data;
+          temp = temp.replace(/&/gi, "&amp;");
+          temp = temp.replace(/</gi, "&lt;");
+          temp = temp.replace(/>/gi, "&gt;");
+          $("#my_pre").html(temp);
           $("#my_submit").removeAttr("disabled");
         }
       }
@@ -172,6 +177,12 @@
           else if (res.message) __msg.showError(res.message);
           else __msg.showError("error");
         });
+
+        $('#my_edit').click(function () {
+          $('#my_pre,#my_edit').hide();
+          $('#my_textarea,#my_submit').show();
+        });
+
       });
     </script>
 
@@ -192,7 +203,9 @@
       button {
         font-size: 16px;
       }
-      a{color: #00f;}
+      a{
+        color: #00f;
+      }
     </style>
   </head>
 
@@ -206,7 +219,7 @@
     </div>
     <div><input type="text" id="access_token" value="eabe0f21c0655c4a9e8e145c81a6****" /></div>
     <div><button id="my_set">My Set</button></div>
-    <div><textarea id="my_textarea" rows="24"></textarea></div>
-    <div><button id="my_submit" disabled>My Submit</button></div>
+    <div><pre id="my_pre" style="font-family: 'Consolas', 'Courier New', monospace;"></pre><textarea id="my_textarea" rows="24" style="display: none;"></textarea></div>
+    <div><button id="my_edit">Edit</button><button id="my_submit" style="display: none;" disabled>My Submit</button></div>
   </body>
 </html>
