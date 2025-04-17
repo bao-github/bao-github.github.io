@@ -1,12 +1,8 @@
 async function print() {
 
-  var myDisplayStream = await navigator.mediaDevices.getDisplayMedia({
+  var myDisplayStream = await navigator.mediaDevices.getUserMedia({
     audio: true,
-    video: {
-      aspectRatio: {
-        ideal: 16 / 9,
-      },
-    },
+    video: true,
   });
 
   document.getElementById("local_video").srcObject = myDisplayStream;
