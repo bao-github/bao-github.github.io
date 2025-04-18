@@ -86,7 +86,8 @@
             if (getRes.message) {
               _alert("GET : " + getRes.message);
             } else {
-              flask.updateCode(deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content)))));
+              if(getRes.content)
+                flask.updateCode(deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content)))));
             }
             maskJq.hide();
           }
