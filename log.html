@@ -78,7 +78,7 @@
             }, 3000);
           };
 
-          var localTk = window.localStorage.getItem("token");
+          var localTk = window.sessionStorage.getItem("token");
           if (localTk != null) {
             token.val(localTk);
             gitee_access_token = localTk;
@@ -97,7 +97,7 @@
           $("#my-set").click(function () {
             var tempTk = token.val();
             gitee_access_token = tempTk;
-            window.localStorage.setItem("token", tempTk);
+            window.sessionStorage.setItem("token", tempTk);
           });
 
           $("#my-save").click(function () {
