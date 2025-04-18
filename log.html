@@ -49,7 +49,7 @@
       };
 
       $(function () {
-        $('#my-comm').append(comm_pages);
+        $("#my-comm").append(comm_pages);
         (async function () {
           var flask = new CodeFlask("#my-edit", { language: "js", lineNumbers: true });
           var token = $("#my-token");
@@ -88,8 +88,7 @@
             if (getRes.message) {
               _alert("GET : " + getRes.message);
             } else {
-              if(getRes.content)
-                flask.updateCode(deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content)))));
+              if (getRes.content) flask.updateCode(deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content)))));
             }
             maskJq.hide();
           }
@@ -144,9 +143,7 @@
 
   <body>
     <div style="width: 1000px; margin: 0 auto">
-      <div style="padding: 5px 5px 0 5px" id="my-comm">
-
-      </div>
+      <div style="padding: 5px 5px 0 5px" id="my-comm"></div>
       <div style="padding: 5px 5px 0 5px">
         <input type="text" id="my-token" value="eabe0f21c0655c4a9e8e145c81a6****" style="width: 300px; text-align: center" />
         <button id="my-set" style="width: 80px">Set</button>
