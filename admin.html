@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>admin</title>
+    <script src="./jquery-3.5.1.min.js"></script>
+    <script src="./aes-3.1.2.js"></script>
+    <script type="text/javascript">
+      var wordEncrypt1 = function (word) {
+        var key = CryptoJS.enc.Utf8.parse("12345678900000001234567890000000");
+        var iv = CryptoJS.enc.Utf8.parse("1234567890000000");
+        var srcs = CryptoJS.enc.Utf8.parse(word);
+        var encrypted = CryptoJS.AES.encrypt(srcs, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+        return encrypted.ciphertext.toString();
+      };
+
+      var ajax = async function (url, method, body) {
+        var params = {
+          method: method,
+          headers: { "Content-Type": "application/json;charset=UTF-8" },
+        };
+        if (body) {
+          params.body = body;
+        }
+        var response = await Promise.race([
+          fetch(url, params),
+          new Promise(function (resolve, reject) {
+            setTimeout(() => {
+              resolve({
+                json: function () {
+                  return { message: "TIMEOUT" };
+                },
+              });
+            }, 5 * 1000);
+          }),
+        ]);
+        return response.json();
+      };
+
+      $(function () {
+        (async function () {
+          var owner = "NieShuBao",
+            repo = "sync-01";
+
+          $("#my-create").click(function () {
+            (async function () {
+              var token = $("#my-token").val();
+              var name = $("#my-name").val();
+
+              var postRes = await ajax(
+                `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${name}`,
+                //
+                "POST",
+                JSON.stringify({
+                  access_token: token,
+                  content: btoa(unescape(encodeURIComponent(wordEncrypt1("init")))),
+                  message: "insert-" + new Date().toLocaleString(),
+                })
+              );
+              if (postRes.message) {
+                alert("POST : " + postRes.message);
+              } else {
+                alert("OK");
+              }
+            })();
+          });
+        })();
+      });
+    </script>
+    <style type="text/css">
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="width: 1000px; margin: 0 auto">
+      <div style="padding: 5px 5px 0 5px">
+        <input type="text" id="my-token" value="eabe0f21c0655c4a9e8e145c81a6****" style="width: 300px; text-align: center" />
+      </div>
+      <div style="padding: 5px">
+        <input type="text" id="my-name" style="width: 300px; text-align: center" />
+        <button id="my-create" style="width: 160px">Create</button>
+      </div>
+    </div>
+  </body>
+</html>
