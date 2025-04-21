@@ -24,6 +24,13 @@
         return decrypted.toString(CryptoJS.enc.Utf8);
       };
 
+      var _r = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;", "/": "&#x2F;", "`": "&#x60;", "=": "&#x3D;" };
+      var _p = function (e) {
+        return String(e).replace(/[&<>"'`=/]/g, function (e) {
+          return _r[e];
+        });
+      };
+
       var ajax = async function (url, method, body) {
         var params = {
           method: method,
@@ -50,15 +57,16 @@
       $(function () {
         $("#my-comm").append(comm_pages);
         (async function () {
-          var flask = $("#my-edit");
-          var token = $("#my-token");
-          var msgJq = $("#my-msg");
-          var maskJq = $("#my-mask");
+          var myTextarea = $("#my-textarea");
+          var myToken = $("#my-token");
+          var myMask = $("#my-mask");
+          var myPre = $("#my-pre");
+          var myMsg = $("#my-msg");
 
-          var owner = "NieShuBao",
-            repo = "sync-01",
-            path = "github-new-index.txt",
-            gitee_access_token = "";
+          var owner = "NieShuBao";
+          var repo = "sync-01";
+          var path = "github-new-index.txt";
+          var gitee_access_token = "";
 
           var get = function () {
             return ajax(
@@ -70,29 +78,33 @@
 
           var _alert_timer = null;
           var _alert = function (text) {
-            msgJq.html(text);
+            myMsg.html(text);
             if (_alert_timer != null) clearTimeout(_alert_timer);
             _alert_timer = setTimeout(function () {
-              msgJq.html("");
+              myMsg.html("");
             }, 3000);
           };
 
-          var localTk = window.localStorage.getItem("token");
-          if (localTk != null) {
-            gitee_access_token = localTk;
-
-            maskJq.show();
+          var localToken = window.localStorage.getItem("token");
+          if (localToken != null) {
+            gitee_access_token = localToken;
+            //
+            myMask.show();
             var getRes = await get();
             if (getRes.message) {
               _alert("GET : " + getRes.message);
             } else {
-              if (getRes.content) flask.val(deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content)))));
+              if (getRes.content) {
+                var data = deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content))));
+                myPre.html(_p(data));
+                myTextarea.val(data);
+              }
             }
-            maskJq.hide();
+            myMask.hide();
           }
 
           $("#my-set").click(function () {
-            window.localStorage.setItem("token", "eabe0f21c0655c4a9e8e145c81a6" + token.val());
+            window.localStorage.setItem("token", "eabe0f21c0655c4a9e8e145c81a6" + myToken.val());
             window.location.reload();
           });
 
@@ -101,9 +113,15 @@
             window.location.reload();
           });
 
+          $("#my-edit").click(function () {
+            $("#my-pre,#my-edit").hide();
+            $("#my-textarea,#my-save").show();
+          });
+
           $("#my-save").click(function () {
             (async function () {
-              maskJq.show();
+              //
+              myMask.show();
               var getRes = await get();
               if (getRes.message) {
                 _alert("GET : " + getRes.message);
@@ -114,7 +132,7 @@
                   "PUT",
                   JSON.stringify({
                     access_token: gitee_access_token,
-                    content: btoa(unescape(encodeURIComponent(wordEncrypt1(flask.val())))),
+                    content: btoa(unescape(encodeURIComponent(wordEncrypt1(myTextarea.val())))),
                     message: "update-" + new Date().toLocaleString(),
                     sha: getRes.sha,
                   })
@@ -125,7 +143,7 @@
                   _alert("OK");
                 }
               }
-              maskJq.hide();
+              myMask.hide();
             })();
           });
         })();
@@ -167,10 +185,12 @@
         <button id="my-clear" style="width: 80px; margin-left: 4px; color: #f00">Clear</button>
       </div>
       <div style="padding: 2px 0">
-        <textarea id="my-edit" rows="25"></textarea>
+        <pre id="my-pre" style="font-size: 20px; overflow: auto"></pre>
+        <textarea id="my-textarea" rows="25" style="display: none"></textarea>
       </div>
       <div style="padding: 2px 0">
-        <button id="my-save" style="width: 160px">Save</button>
+        <button id="my-edit" style="width: 160px">Edit</button>
+        <button id="my-save" style="width: 160px; display: none">Save</button>
       </div>
       <div style="padding: 2px 0">
         <span id="my-msg" style="color: #f00; padding: 0 10px; font-size: 14px; vertical-align: middle"></span>
