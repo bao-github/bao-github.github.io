@@ -78,9 +78,8 @@
             }, 3000);
           };
 
-          var localTk = window.sessionStorage.getItem("token");
+          var localTk = window.localStorage.getItem("token");
           if (localTk != null) {
-            token.val(localTk);
             gitee_access_token = localTk;
 
             maskJq.show();
@@ -94,9 +93,13 @@
           }
 
           $("#my-set").click(function () {
-            var tempTk = token.val();
-            gitee_access_token = tempTk;
-            window.sessionStorage.setItem("token", tempTk);
+            window.localStorage.setItem("token", "eabe0f21c0655c4a9e8e145c81a6" + token.val());
+            window.location.reload();
+          });
+
+          $("#my-clear").click(function () {
+            window.localStorage.removeItem("token");
+            window.location.reload();
           });
 
           $("#my-save").click(function () {
@@ -153,8 +156,9 @@
     <div style="width: 1000px; margin: 0 auto">
       <div style="padding: 5px 5px 0 5px" id="my-comm"></div>
       <div style="padding: 5px 5px 0 5px">
-        <input type="text" id="my-token" value="eabe0f21c0655c4a9e8e145c81a6****" style="width: 300px; text-align: center" />
+        <input type="text" id="my-token" value="****" style="width: 300px; text-align: center" />
         <button id="my-set" style="width: 80px">Set</button>
+        <button id="my-clear" style="width: 80px">Clear</button>
       </div>
       <div style="padding: 5px 5px 0 5px">
         <div id="my-edit" style="position: relative; height: 500px; border: 1px solid #ccc"></div>
