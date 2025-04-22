@@ -7,6 +7,7 @@
     <script src="./jquery-3.5.1.min.js"></script>
     <script src="./aes-3.1.2.js"></script>
     <script type="text/javascript">
+      //
       var wordEncrypt1 = function (word) {
         var key = CryptoJS.enc.Utf8.parse("12345678900000001234567890000000");
         var iv = CryptoJS.enc.Utf8.parse("1234567890000000");
@@ -15,6 +16,7 @@
         return encrypted.ciphertext.toString();
       };
 
+      //
       var ajax = async function (url, method, body) {
         var params = {
           method: method,
@@ -38,31 +40,50 @@
         return response.json();
       };
 
+      //
       $(function () {
         (async function () {
+          //
+          var myToken = $("#my-token");
+          var myName = $("#my-name");
+          var myMask = $("#my-mask");
+          //
           var owner = "NieShuBao",
             repo = "sync-01";
 
+          //
+          var post = function (name, params) {
+            return ajax(
+              `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${name}`,
+              "POST",
+              //
+              JSON.stringify(params)
+            );
+          };
+
+          //
+          var postOne = async function () {
+            myMask.show();
+            var postRes = await post(myName.val(), {
+              access_token: "eabe0f21c0655c4a9e8e145c81a6" + myToken.val(),
+              content: btoa(unescape(encodeURIComponent(wordEncrypt1("init")))),
+              message: "insert-" + new Date().toLocaleString(),
+            });
+            if (postRes.message) {
+              //
+              alert("ERR POST : " + postRes.message);
+            } else {
+              //
+              alert("OK POST");
+            }
+            myMask.hide();
+          };
+
+          //
           $("#my-create").click(function () {
             (async function () {
-              var token = $("#my-token").val();
-              var name = $("#my-name").val();
-
-              var postRes = await ajax(
-                `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${name}`,
-                //
-                "POST",
-                JSON.stringify({
-                  access_token: token,
-                  content: btoa(unescape(encodeURIComponent(wordEncrypt1("init")))),
-                  message: "insert-" + new Date().toLocaleString(),
-                })
-              );
-              if (postRes.message) {
-                alert("POST : " + postRes.message);
-              } else {
-                alert("OK");
-              }
+              // POST
+              await postOne();
             })();
           });
         })();
@@ -77,17 +98,26 @@
       body {
         margin: 0;
       }
+      #app {
+        padding: 5px;
+        font-size: 0;
+      }
     </style>
   </head>
 
   <body>
-    <div style="width: 1000px; margin: 0 auto">
-      <div style="padding: 5px 5px 0 5px">
-        <input type="text" id="my-token" value="eabe0f21c0655c4a9e8e145c81a6****" style="width: 300px; text-align: center" />
+    <div id="app">
+      <div style="padding: 2px 0">
+        <input type="text" id="my-token" value="****" style="width: 100px; text-align: center" autocomplete="off" />
       </div>
-      <div style="padding: 5px">
+      <div style="padding: 2px 0">
         <input type="text" id="my-name" style="width: 300px; text-align: center" />
         <button id="my-create" style="width: 160px">Create</button>
+      </div>
+    </div>
+    <div id="my-mask" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999; display: none">
+      <div style="position: absolute; top: 120px; left: 50%; margin-left: -45px; font-size: 0; border-radius: 4px; overflow: hidden">
+        <img src="./loading.gif" />
       </div>
     </div>
   </body>
