@@ -4,6 +4,7 @@ var comm_pages = `
     <a href="./index.html">index</a>
     <a href="./index-2.html">index-2</a>
     <a href="./password.html">password</a>
+    <a href="./bookmarks.html">bookmarks</a>
     |
     <a href="#page-pos-1">&lt;bottom&gt;</a>
 `;

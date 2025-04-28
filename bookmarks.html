@@ -77,7 +77,7 @@
           var _bbbbb = function (aa, bb) {
             for (var i = 0; i < aa.length; i++) {
               if (aa[i].children) {
-                _ccccc += "<p>" + bb + aa[i].title + "</p>";
+                _ccccc += "<p>" + (bb + aa[i].title == "" ? "收藏夹" : bb + aa[i].title) + "</p>";
                 _bbbbb(aa[i].children, bb + "&nbsp;&nbsp;&nbsp;&nbsp;");
               } else {
                 if (eeeid) {
