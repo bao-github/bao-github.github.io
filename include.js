@@ -59,6 +59,7 @@ var comm_pages = `
     <a href="./index.html">index</a>
     <a href="./text-1.html">text-1</a>
     <a href="./text-2.html">text-2</a>
+    <a href="./text-3.html">text-3</a>
     <a href="./password.html">password</a>
     <a href="./bookmarks.html">bookmarks</a>
     |
