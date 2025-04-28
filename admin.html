@@ -52,23 +52,18 @@
             repo = "sync-01";
 
           //
-          var post = function (name, params) {
-            return ajax(
-              `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${name}`,
-              "POST",
-              //
-              JSON.stringify(params)
-            );
-          };
-
-          //
           var postOne = async function () {
             myMask.show();
-            var postRes = await post(myName.val(), {
-              access_token: "eabe0f21c0655c4a9e8e145c81a6" + myToken.val(),
-              content: btoa(unescape(encodeURIComponent(wordEncrypt1("init")))),
-              message: "insert-" + new Date().toLocaleString(),
-            });
+            var postRes = await ajax(
+              `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/` + myName.val(),
+              "POST",
+              //
+              JSON.stringify({
+                access_token: "eabe0f21c0655c4a9e8e145c81a6" + myToken.val(),
+                content: btoa(unescape(encodeURIComponent(wordEncrypt1("init")))),
+                message: "insert-" + new Date().toLocaleString(),
+              })
+            );
             if (postRes.message) {
               //
               alert("ERR POST : " + postRes.message);
