@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>bookmarks</title>
+    <script src="./jquery-3.5.1.min.js"></script>
+    <script src="./common.js"></script>
+    <script type="text/javascript">
+      //
+      var _r = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;", "/": "&#x2F;", "`": "&#x60;", "=": "&#x3D;" };
+      var _p = function (e) {
+        return String(e).replace(/[&<>"'`=/]/g, function (e) {
+          return _r[e];
+        });
+      };
+
+      //
+      var ajax = async function (url, method, body) {
+        var params = {
+          method: method,
+          headers: { "Content-Type": "application/json;charset=UTF-8" },
+        };
+        if (body) {
+          params.body = body;
+        }
+        var response = await Promise.race([
+          fetch(url, params),
+          new Promise(function (resolve, reject) {
+            setTimeout(() => {
+              resolve({
+                json: function () {
+                  return { message: "TIMEOUT" };
+                },
+              });
+            }, 5 * 1000);
+          }),
+        ]);
+        return response.json();
+      };
+
+      //
+      $(function () {
+        //
+        $("#my-comm1").append(comm_pages);
+        $("#my-comm2").append(comm_pages);
+        //
+        (async function () {
+          //
+          var myToken = $("#my-token");
+          var myMask = $("#my-mask");
+          var myPre = $("#my-pre");
+          var myMsg = $("#my-msg");
+
+          //
+          var owner = "NieShuBao";
+          var repo = "sync-01";
+          var path = "github-new-bookmarks.txt";
+
+          //
+          var gitee_access_token = window.localStorage.getItem("token");
+
+          var eeeid = window.localStorage.getItem("eeeid");
+          var eeess;
+
+          //
+          var get = function () {
+            return ajax(
+              `https://gitee.com/api/v5/repos/${owner}/${repo}/contents/${path}?access_token=${gitee_access_token}`,
+              "GET"
+              //
+            );
+          };
+
+          var _ccccc = "";
+
+          var _bbbbb = function (aa, bb) {
+            for (var i = 0; i < aa.length; i++) {
+              if (aa[i].children) {
+                _ccccc += "<p>" + bb + aa[i].title + "</p>";
+                _bbbbb(aa[i].children, bb + "&nbsp;&nbsp;&nbsp;&nbsp;");
+              } else {
+                if (eeeid) {
+                  eeess = '<img src="chrome-extension://' + eeeid + "/_favicon/?pageUrl=" + encodeURIComponent(aa[i].url) + '&size=16"/>';
+                } else {
+                  eeess = "";
+                }
+                _ccccc += '<div><a href="' + aa[i].url + '" target="_blank">' + bb + eeess + _p(aa[i].title) + "</a></div>";
+              }
+            }
+          };
+
+          //
+          var getOne = async function () {
+            myMask.show();
+            var getRes = await get();
+            if (getRes.message) {
+              //
+              _alert("ERR GET : " + getRes.message);
+            } else {
+              _alert("OK GET");
+              //
+              if (getRes.content) {
+                var data = decodeURIComponent(escape(atob(getRes.content)));
+                _ccccc = "";
+                _bbbbb(JSON.parse(data), "");
+                myPre.html(_ccccc);
+              }
+            }
+            myMask.hide();
+          };
+
+          //
+          var _alert_timer = null;
+          //
+          var _alert = function (text) {
+            myMsg.html(text);
+            if (_alert_timer != null) clearTimeout(_alert_timer);
+            _alert_timer = setTimeout(function () {
+              myMsg.html("");
+            }, 3000);
+          };
+
+          // GET
+          await getOne();
+
+          //
+          $("#my-set").click(function () {
+            window.localStorage.setItem("token", "eabe0f21c0655c4a9e8e145c81a6" + myToken.val());
+            window.location.reload();
+          });
+
+          //
+          $("#my-clear").click(function () {
+            window.localStorage.removeItem("token");
+            window.location.reload();
+          });
+
+          //
+          $("#my-eid-set").click(function () {
+            window.localStorage.setItem("eeeid", myToken.val());
+            window.location.reload();
+          });
+
+          //
+          $("#my-eid-clear").click(function () {
+            window.localStorage.removeItem("eeeid");
+            window.location.reload();
+          });
+        })();
+      });
+    </script>
+    <style type="text/css">
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        margin: 0;
+      }
+      #app {
+        padding: 5px;
+        font-size: 0;
+      }
+      #app textarea {
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        box-sizing: border-box;
+        white-space: nowrap;
+        line-height: 22px;
+        font-size: 20px;
+        overflow: auto;
+        outline: none;
+        resize: none;
+        width: 100%;
+      }
+      pre {
+        font-family: Consolas, "Courier New", monospace;
+      }
+      a {
+        color: #00f;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <a name="page-pos-0"></a>
+      <div style="padding: 2px 0; font-size: 16px; text-align: center" id="my-comm1"></div>
+      <div style="padding: 2px 0">
+        <input type="text" id="my-token" value="****" style="width: 100px; text-align: center" autocomplete="off" />
+        <button id="my-set" style="width: 80px; margin-left: 4px">Set</button>
+        <button id="my-clear" style="width: 80px; margin-left: 4px; color: #f00">Clear</button>
+        <button id="my-eid-set" style="width: 80px; margin-left: 4px">Eid-Set</button>
+        <button id="my-eid-clear" style="width: 80px; margin-left: 4px">Eid-Clear</button>
+      </div>
+      <div style="padding: 2px 0">
+        <pre id="my-pre" style="font-size: 16px"></pre>
+      </div>
+      <div style="padding: 2px 0">
+        <span id="my-msg" style="color: #f00; padding: 0 10px; font-size: 14px; vertical-align: middle"></span>
+      </div>
+      <div style="padding: 2px 0; font-size: 16px; text-align: center" id="my-comm2"></div>
+      <a name="page-pos-1"></a>
+    </div>
+    <div id="my-mask" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999; display: none">
+      <div style="position: absolute; top: 120px; left: 50%; margin-left: -45px; font-size: 0; border-radius: 4px; overflow: hidden">
+        <img src="./loading.gif" />
+      </div>
+    </div>
+  </body>
+</html>
