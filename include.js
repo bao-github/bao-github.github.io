@@ -119,6 +119,9 @@ $(function () {
       a {
         color: #00f;
       }
+      img {
+        vertical-align: middle;
+      }
     </style>
   `);
 
