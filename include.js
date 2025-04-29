@@ -159,6 +159,16 @@ $(function () {
     </div>
  `);
 
+  if (!/Android/i.test(window.navigator.userAgent)) {
+    body.append(`
+      <div style="position: fixed; right: 20px; bottom: 20px; width: 56px; height: 56px; z-index: 999">
+          <a href="#page-pos-0">
+            <img src="./top.png" />
+          </a>
+      </div>
+    `);
+  }
+
   $("#my-comm1").append(comm_pages);
   $("#my-comm2").append(comm_pages);
 
