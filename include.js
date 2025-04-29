@@ -54,16 +54,14 @@ var ajax = async function (url, method, body) {
 
 //
 var comm_pages = `
-    <a href="#page-pos-0">&lt;top&gt;</a>
+    <a href="#page-pos-0" style="font-size:20px;">&lt;top&gt;</a>
     |
     <a href="./index.html">index</a>
-    <a href="./text-1.html">text-1</a>
-    <a href="./text-2.html">text-2</a>
-    <a href="./text-3.html">text-3</a>
+    <a href="./temp.html">temp</a>
     <a href="./password.html">password</a>
     <a href="./bookmarks.html">bookmarks</a>
     |
-    <a href="#page-pos-1">&lt;bottom&gt;</a>
+    <a href="#page-pos-1" style="font-size:20px;">&lt;bottom&gt;</a>
 `;
 
 //

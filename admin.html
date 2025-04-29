@@ -13,6 +13,7 @@
         (async function () {
           //
           var myName = $("#my-name");
+          var myCreate = $("#my-create");
 
           //
           var gitee_access_token = window.localStorage.getItem("token");
@@ -41,7 +42,7 @@
           };
 
           //
-          $("#my-create").click(function () {
+          myCreate.click(function () {
             (async function () {
               // POST
               await postOne();
@@ -59,9 +60,11 @@
         <div class="w-com"></div>
         <div class="w-box">
           <!--start-->
-          <div style="padding: 20px; background: #ddd">
-            <input type="text" id="my-name" style="width: 300px; text-align: center" />
-            <button id="my-create" style="width: 160px; margin-left: 4px">Create</button>
+          <div style="padding: 2px">
+            <div style="text-align: center">
+              <input type="text" id="my-name" style="width: 240px; text-align: center" />
+              <button id="my-create" style="width: 160px; margin-left: 4px">Create</button>
+            </div>
           </div>
           <!--end-->
         </div>
