@@ -29,7 +29,7 @@
           var _bbbbb = function (aa, bb) {
             for (var i = 0; i < aa.length; i++) {
               if (aa[i].children) {
-                _ccccc += "<p>" + (bb + aa[i].title == "" ? "收藏夹" : bb + aa[i].title) + "</p>";
+                _ccccc += "<div>" + (bb + aa[i].title == "" ? "收藏夹" : bb + aa[i].title) + "</div>";
                 _bbbbb(aa[i].children, bb + "&nbsp;&nbsp;&nbsp;&nbsp;");
               } else {
                 var eeess = eeeid
@@ -78,7 +78,7 @@
         <div class="w-box">
           <!--start-->
           <div style="padding: 2px">
-            <pre id="my-pre" style="font-size: 16px"></pre>
+            <pre id="my-pre" style="font-size: 15px;overflow: auto"></pre>
           </div>
           <!--end-->
         </div>

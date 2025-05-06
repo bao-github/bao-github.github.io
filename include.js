@@ -113,6 +113,8 @@ $(function () {
       }
       pre {
         font-family: Consolas, "Courier New", monospace;
+        background: url('./line.png');
+        line-height: 21px;
       }
       a {
         color: #00f;
