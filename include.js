@@ -139,7 +139,7 @@ $(function () {
 
   mainCom.append(`
     <div style="padding: 2px">
-        <input type="text" id="my-token" value="****" style="width: 100px; text-align: center" autocomplete="off" />
+        <input type="text" id="my-token" value="****" style="width: 50px; text-align: center" autocomplete="off" />
         <button id="my-set" style="width: 80px; margin-left: 4px">Set</button>
         <button id="my-remove" style="width: 80px; margin-left: 4px; color: #f00">Clear</button>
         <button id="my-eid-set" style="width: 80px; margin-left: 4px">Eid-Set</button>
