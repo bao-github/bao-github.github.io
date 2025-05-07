@@ -57,7 +57,7 @@ var comm_pages = `
     <a href="#page-pos-0" style="font-size:20px;">&lt;top&gt;</a>
     |
     <a href="./index.html">index</a>
-    <a href="./temp.html">temp</a>
+    <a href="./list.html">list</a>
     <a href="./password.html">password</a>
     <a href="./bookmarks.html">bookmarks</a>
     |
