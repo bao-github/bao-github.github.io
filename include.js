@@ -46,7 +46,7 @@ var ajax = async function (url, method, body) {
             return { message: "TIMEOUT" };
           },
         });
-      }, 5 * 1000);
+      }, 10 * 1000);
     }),
   ]);
   return response.json();
