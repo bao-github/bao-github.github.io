@@ -23,6 +23,11 @@
           var eeeid = window.localStorage.getItem("eeeid");
 
           //
+          var viewMode = function () {
+            myPre.show();
+          };
+
+          //
           var _ccccc = "";
 
           //
@@ -78,7 +83,7 @@
         <div class="w-box">
           <!--start-->
           <div style="padding: 2px">
-            <pre id="my-pre" style="font-size: 15px;overflow: auto"></pre>
+            <pre id="my-pre" style="font-size: 15px; overflow: auto; display: none"></pre>
           </div>
           <!--end-->
         </div>
