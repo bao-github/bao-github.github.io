@@ -1,3 +1,25 @@
+// ->
+function nnnn(P, annualRate, years) {
+  // 将年利率转换为月利率
+  var r = annualRate / 12 / 100;
+  // 计算总还款月数
+  var n = years * 12;
+  // 使用等额本息公式计算每月还款金额
+  var M = P * (r / (1 - Math.pow(1 + r, -n)));
+  return M.toFixed(2); // 返回保留两位小数的结果
+}
+
+function yyyy(P, annualRate, months) {
+  // 将年利率转换为月利率
+  var r = annualRate / 12 / 100;
+  // 计算总还款月数
+  var n = months;
+  // 使用等额本息公式计算每月还款金额
+  var M = P * (r / (1 - Math.pow(1 + r, -n)));
+  return M.toFixed(2); // 返回保留两位小数的结果
+}
+// <-
+
 //
 var wordEncrypt1 = function (word) {
   var key = CryptoJS.enc.Utf8.parse("12345678900000001234567890000000");
@@ -17,10 +39,10 @@ var deWordEncrypt1 = function (word) {
 };
 
 //
-var _r = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;", "/": "&#x2F;", "`": "&#x60;", "=": "&#x3D;" };
-var _p = function (e) {
+var _rrrr = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;", "/": "&#x2F;", "`": "&#x60;", "=": "&#x3D;" };
+var _pppp = function (e) {
   return String(e).replace(/[&<>"'`=/]/g, function (e) {
-    return _r[e];
+    return _rrrr[e];
   });
 };
 
