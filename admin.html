@@ -16,6 +16,11 @@
           var myCreate = $("#my-create");
 
           //
+          var myTextarea = $("#my-textarea");
+          var myRead = $("#my-read");
+          var myPre = $("#my-pre");
+
+          //
           var gitee_access_token = window.localStorage.getItem("token");
 
           //
@@ -48,6 +53,11 @@
               await postOne();
             })();
           });
+
+          //
+          myRead.click(function () {
+            myPre.html(_pppp(deWordEncrypt1(decodeURIComponent(escape(myTextarea.val().trim())))));
+          });
         })();
       });
     </script>
@@ -64,6 +74,19 @@
             <div style="text-align: center">
               <input type="text" id="my-name" style="width: 240px; text-align: center" />
               <button id="my-create" style="width: 160px; margin-left: 4px">Create</button>
+            </div>
+          </div>
+          <div style="padding: 2px">
+            <div style="padding: 2px">
+              <textarea id="my-textarea" rows="10" style="white-space: normal"></textarea>
+            </div>
+            <div style="padding: 2px">
+              <div style="text-align: center">
+                <button id="my-read" style="width: 160px">Read</button>
+              </div>
+            </div>
+            <div style="padding: 2px">
+              <pre id="my-pre" style="font-size: 15px"></pre>
             </div>
           </div>
           <!--end-->
