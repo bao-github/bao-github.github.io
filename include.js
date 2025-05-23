@@ -68,7 +68,7 @@ var ajax = async function (url, method, body) {
             return { message: "TIMEOUT" };
           },
         });
-      }, 10 * 1000);
+      }, 15 * 1000);
     }),
   ]);
   return response.json();
@@ -93,7 +93,7 @@ var _alert = function (text) {
   if (_alert_timer != null) clearTimeout(_alert_timer);
   _alert_timer = setTimeout(function () {
     $("#my-msg").html("");
-  }, 3000);
+  }, 5000);
 };
 
 //

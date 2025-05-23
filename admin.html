@@ -14,6 +14,7 @@
           //
           var myName = $("#my-name");
           var myCreate = $("#my-create");
+          var myDelete = $("#my-delete");
 
           //
           var myTextarea = $("#my-textarea");
@@ -47,10 +48,61 @@
           };
 
           //
+          var deleteOne = async function () {
+            maskShow();
+            var listRes = await ajax(
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents?access_token=${gitee_access_token}`,
+              "GET"
+              //
+            );
+            if (listRes.message) {
+              //
+              _alert("ERR LIST : " + listRes.message);
+            } else {
+              //
+              _alert("OK LIST");
+
+              var sha = "";
+              for (var i = 0; i < listRes.length; i++) {
+                if (listRes[i].name == myName.val()) {
+                  sha = listRes[i].sha;
+                  break;
+                }
+              }
+
+              var deleteRes = await ajax(
+                `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + myName.val(),
+                "DELETE",
+                //
+                JSON.stringify({
+                  access_token: gitee_access_token,
+                  sha: sha,
+                  message: "delete-" + new Date().toLocaleString(),
+                })
+              );
+              if (deleteRes.message) {
+                //
+                _alert("ERR DELETE : " + deleteRes.message);
+              } else {
+                //
+                _alert("OK DELETE");
+              }
+            }
+            maskHide();
+          };
+
+          //
           myCreate.click(function () {
             (async function () {
               // POST
               await postOne();
+            })();
+          });
+
+          myDelete.click(function () {
+            (async function () {
+              // DELETE
+              await deleteOne();
             })();
           });
 
@@ -73,7 +125,8 @@
           <div style="padding: 2px">
             <div style="text-align: center">
               <input type="text" id="my-name" style="width: 240px; text-align: center" />
-              <button id="my-create" style="width: 160px; margin-left: 4px">Create</button>
+              <button id="my-create" style="width: 80px; margin-left: 4px">Create</button>
+              <button id="my-delete" style="width: 80px; margin-left: 4px; color: #f00">Delete</button>
             </div>
           </div>
           <div style="padding: 2px">
