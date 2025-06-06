@@ -214,12 +214,4 @@ $(function () {
     window.localStorage.removeItem("eeeid");
     window.location.reload();
   });
-
-  // Title
-  var ccc = window.location.href,
-    ddd = ccc.lastIndexOf("/") + 1,
-    eee = ccc.lastIndexOf("#"),
-    fff = ccc.indexOf("#");
-  if (fff > -1) document.title = ccc.substring(ddd, eee);
-  else document.title = ccc.substring(ddd);
 });
