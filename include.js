@@ -78,9 +78,9 @@ var ajax = async function (url, method, body) {
 var comm_pages = `
     <a href="#page-pos-0" style="font-size:20px;">&lt;top&gt;</a>
     |
-    <a href="./index.html">首页</a>
-    <a href="./books.html">书签</a>
-    <a href="./admin.html">管理</a>
+    <a href="./index.html">index</a>
+    <a href="./bookmarks.html">bookmarks</a>
+    <a href="./admin.html">admin</a>
     |
     <a href="#page-pos-1" style="font-size:20px;">&lt;bottom&gt;</a>
 `;
