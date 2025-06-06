@@ -21,7 +21,10 @@
           var myEdit = $("#my-edit");
 
           //
-          var path = "github-new-index.txt";
+          var mySelect = $("#my-select");
+
+          //
+          var path = window.localStorage.getItem("sfile");
 
           //
           var gitee_access_token = window.localStorage.getItem("token");
@@ -43,6 +46,46 @@
             mySave.hide();
             myPre.show();
             myEdit.show();
+          };
+
+          //
+          var getList = async function () {
+            maskShow();
+            var listRes = await ajax(
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents?access_token=${gitee_access_token}`,
+              "GET"
+              //
+            );
+            if (listRes.message) {
+              //
+              _alert("ERR LIST : " + listRes.message);
+            } else {
+              //
+              _alert("OK LIST");
+              //
+              var optionArray = [];
+              for (var i = 0; i < listRes.length; i++) {
+                var tempName = listRes[i].name;
+                var isSelect = false;
+                if (tempName.startsWith("github-list")) {
+                  if (path) {
+                    if (path == tempName) {
+                      isSelect = true;
+                    }
+                  } else {
+                    path = tempName;
+                  }
+                  optionArray.push(`<option value="` + tempName + `" ` + (isSelect ? "selected" : "") + `>` + tempName + `</option>`);
+                }
+              }
+
+              mySelect.append(optionArray.join(""));
+              mySelect.change(function () {
+                window.localStorage.setItem("sfile", $(this).val());
+                window.location.reload();
+              });
+            }
+            maskHide();
           };
 
           //
@@ -99,6 +142,9 @@
             maskHide();
           };
 
+          // List
+          await getList();
+
           // GET
           await getOne();
 
@@ -126,6 +172,11 @@
         <div class="w-com"></div>
         <div class="w-box">
           <!--start-->
+          <div style="padding: 2px">
+            <div style="text-align: center">
+              <select id="my-select" style="width: 300px; text-align: center"></select>
+            </div>
+          </div>
           <div style="padding: 2px">
             <pre id="my-pre" style="font-size: 15px; overflow: auto; display: none"></pre>
             <textarea id="my-textarea" rows="25" style="display: none"></textarea>
