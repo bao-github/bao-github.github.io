@@ -86,12 +86,12 @@ var comm_pages = `
 `;
 
 //
-var _alert_timer = null;
 var _alert = function (text) {
-  $("#my-msg").html(text);
-  if (_alert_timer != null) clearTimeout(_alert_timer);
-  _alert_timer = setTimeout(function () {
-    $("#my-msg").html("");
+  var d=$('<div></div>');
+  d.html(text);
+  $("#my-msg").append(d);
+  setTimeout(function () {
+    d.remove();
   }, 5000);
 };
 
@@ -170,7 +170,7 @@ $(function () {
 
   mainMsg.append(`
     <div style="padding: 2px">
-        <span id="my-msg" style="color: #f00; padding: 0 10px; font-size: 14px; vertical-align: middle"></span>
+        <div id="my-msg" style="color: #f00;font-size: 14px;"></div>
     </div>
  `);
 
