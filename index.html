@@ -104,7 +104,7 @@
               lastSha = getRes.sha;
               _alert("OK GET");
               //
-              $('.w-dev').append('a');
+              $('.w-dev').append('a'+getRes.content.length);
               var data = deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content))));
               $('.w-dev').append('b');
               myTextarea.val(data);
