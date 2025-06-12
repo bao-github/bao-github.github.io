@@ -104,6 +104,7 @@
               lastSha = getRes.sha;
               _alert("OK GET");
               //
+              $('.w-dev').append(path+"-"+gitee_access_token);
               var data = deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content))));
               myTextarea.val(data);
               myPre.html(_pppp(data));
@@ -167,6 +168,7 @@
 
   <body>
     <div id="app">
+      <div class="w-dev" style="font-size: 12px;"></div>
       <div class="w-head"></div>
       <div class="w-main">
         <div class="w-com"></div>
