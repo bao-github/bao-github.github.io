@@ -52,29 +52,26 @@ var __repo = "sync-01";
 
 //
 var ajax = async function (url, method, body) {
-  try {
-    var controller = new AbortController();
-    var timeoutId = setTimeout(() => controller.abort(), 10 * 1000);
-
-    var params = {
-      method: method,
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-      signal: controller.signal,
-    };
-
-    if (body) params.body = body;
-
-    var response = await fetch(url, params);
-    clearTimeout(timeoutId);
-    return response.json();
-  } catch (e) {
-    if (e.name === "AbortError") {
-      return { message: "Timeout" };
-    }
-    return { message: e.toString() };
+  var params = {
+    method: method,
+    headers: { "Content-Type": "application/json;charset=UTF-8" },
+  };
+  if (body) {
+    params.body = body;
   }
+  var response = await Promise.race([
+    fetch(url, params),
+    new Promise(function (resolve, reject) {
+      setTimeout(() => {
+        resolve({
+          json: function () {
+            return { message: "TIMEOUT" };
+          },
+        });
+      }, 15 * 1000);
+    }),
+  ]);
+  return response.json();
 };
 
 //
@@ -90,7 +87,7 @@ var comm_pages = `
 
 //
 var _alert = function (text) {
-  var d = $("<div></div>");
+  var d=$('<div></div>');
   d.html(text);
   $("#my-msg").append(d);
   setTimeout(function () {
