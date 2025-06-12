@@ -104,10 +104,15 @@
               lastSha = getRes.sha;
               _alert("OK GET");
               //
+              $('.w-dev').append('a');
               var data = deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content))));
+              $('.w-dev').append('b');
               myTextarea.val(data);
+              $('.w-dev').append('c');
               myPre.html(_pppp(data));
+              $('.w-dev').append('d');
               viewMode();
+              $('.w-dev').append('e');
             }
             maskHide();
           };
@@ -167,6 +172,7 @@
 
   <body>
     <div id="app">
+      <div class="w-dev"></div>
       <div class="w-head"></div>
       <div class="w-main">
         <div class="w-com"></div>
