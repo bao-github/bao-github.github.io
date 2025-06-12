@@ -104,7 +104,9 @@
               lastSha = getRes.sha;
               _alert("OK GET");
               //
-              $('.w-dev').append('a'+getRes.content.length);
+              $('.w-dev').append('a1:'+__owner+"-"+__repo+"-"+path+"-"+gitee_access_token);
+              $('.w-dev').append('a2:'+getRes.content);
+              $('.w-dev').append('a3:'+getRes.content.length);
               var data = deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content))));
               $('.w-dev').append('b');
               myTextarea.val(data);
