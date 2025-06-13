@@ -158,6 +158,7 @@ $(function () {
         outline: none;
         resize: none;
         width: 100%;
+        tab-size: 2;
       }
       pre {
         font-family: Consolas, "Courier New", monospace;
