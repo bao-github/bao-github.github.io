@@ -69,17 +69,22 @@
               //
               _alert("OK LIST");
               //
+              if (
+                listRes.filter((c) => {
+                  return c.name.startsWith("github-list") && c.name == path;
+                }).length == 0
+              ) {
+                path = "github-list-index.txt";
+                window.localStorage.setItem("sfile", path);
+              }
+              //
               var optionArray = [];
               for (var i = 0; i < listRes.length; i++) {
                 var tempName = listRes[i].name;
                 var isSelect = false;
                 if (tempName.startsWith("github-list")) {
-                  if (path) {
-                    if (path == tempName) {
-                      isSelect = true;
-                    }
-                  } else {
-                    path = tempName;
+                  if (path == tempName) {
+                    isSelect = true;
                   }
                   optionArray.push(`<option value="` + tempName + `" ` + (isSelect ? "selected" : "") + `>` + "&gt;&gt;" + tempName + `</option>`);
                 }
