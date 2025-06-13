@@ -108,6 +108,30 @@ var maskHide = function () {
   $("#my-mask").hide();
 };
 
+//
+var curEditor = null;
+var curEditorFlag = false;
+var genEditor = function (code) {
+  const script = document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js";
+  script.onload = () => {
+    require.config({
+      paths: {
+        vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs",
+      },
+    });
+    require(["vs/editor/editor.main"], () => {
+      curEditor = monaco.editor.create(document.getElementById("my-editor"), {
+        value: code,
+        theme: "vs",
+        language: "plaintext",
+        automaticLayout: true,
+      });
+    });
+  };
+  document.head.appendChild(script);
+};
+
 $(function () {
   //
   $("head").append(`

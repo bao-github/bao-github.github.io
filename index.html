@@ -14,7 +14,11 @@
         (async function () {
           //
           var myTextarea = $("#my-textarea");
+          var myEditor = $("#my-editor");
           var mySave = $("#my-save");
+          var myYang = $("#my-yang");
+          var myLang = $("#my-lang");
+          var myCode = $("#my-code");
 
           //
           var myPre = $("#my-pre");
@@ -36,6 +40,7 @@
           var editMode = function () {
             myTextarea.show();
             mySave.show();
+            myCode.show();
             myPre.hide();
             myEdit.hide();
           };
@@ -44,6 +49,7 @@
           var viewMode = function () {
             myTextarea.hide();
             mySave.hide();
+            myCode.hide();
             myPre.show();
             myEdit.show();
           };
@@ -114,6 +120,16 @@
 
           //
           var putOne = async function () {
+            //
+            if (curEditorFlag) {
+              myTextarea.val(curEditor.getValue());
+              myTextarea.show();
+              myEditor.hide();
+              myYang.hide();
+              myLang.hide();
+              curEditorFlag = false;
+            }
+
             maskShow();
             var putRes = await ajax(
               `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/${path}`,
@@ -160,6 +176,44 @@
           myEdit.click(function () {
             editMode();
           });
+
+          //
+          myCode.click(function () {
+            if (curEditor == null) {
+              genEditor(myTextarea.val());
+              myTextarea.hide();
+              myEditor.show();
+              myYang.show();
+              myLang.show();
+              curEditorFlag = true;
+            } else {
+              if (curEditorFlag) {
+                myTextarea.val(curEditor.getValue());
+                myTextarea.show();
+                myEditor.hide();
+                myYang.hide();
+                myLang.hide();
+                curEditorFlag = false;
+              } else {
+                curEditor.setValue(myTextarea.val());
+                myTextarea.hide();
+                myEditor.show();
+                myYang.show();
+                myLang.show();
+                curEditorFlag = true;
+              }
+            }
+          });
+
+          //
+          myYang.change(function () {
+            monaco.editor.setTheme($(this).val());
+          });
+
+          //
+          myLang.change(function () {
+            monaco.editor.setModelLanguage(curEditor.getModel(), $(this).val());
+          });
         })();
       });
     </script>
@@ -180,10 +234,25 @@
           <div style="padding: 2px">
             <pre id="my-pre" style="font-size: 15px; overflow: auto; display: none"></pre>
             <textarea id="my-textarea" rows="25" style="display: none"></textarea>
+            <div id="my-editor" style="width: 100%; height: 600px; border: 1px solid #ccc; display: none"></div>
           </div>
           <div style="padding: 2px">
             <button id="my-edit" style="width: 160px; display: none">Edit</button>
             <button id="my-save" style="width: 160px; display: none">Save</button>
+            <select id="my-yang" style="display: none; margin-left: 24px">
+              <option value="vs">vs</option>
+              <option value="vs-dark">vs-dark</option>
+            </select>
+            <select id="my-lang" style="display: none; margin-left: 4px">
+              <option value="plaintext">plaintext</option>
+              <option value="javascript">javascript</option>
+              <option value="html">html</option>
+              <option value="css">css</option>
+              <option value="java">java</option>
+              <option value="sql">sql</option>
+              <option value="json">json</option>
+            </select>
+            <button id="my-code" style="width: 100px; display: none; margin-left: 4px">Code</button>
           </div>
           <!--end-->
         </div>
