@@ -81,9 +81,9 @@ var ajax = async function (url, method, body) {
 var comm_pages = `
     <a href="#page-pos-0" style="font-size:1.2rem;">&lt;top&gt;</a>
     |
-    <a href="./index.html" style="font-size:1.1rem;">index</a>
-    <a href="./bookmarks.html" style="font-size:1.1rem;">bookmarks</a>
-    <a href="./admin.html" style="font-size:1.1rem;">admin</a>
+    <a href="./index.html" style="font-size:1rem;">index</a>
+    <a href="./bookmarks.html" style="font-size:1rem;">bookmarks</a>
+    <a href="./admin.html" style="font-size:1rem;">admin</a>
     |
     <a href="#page-pos-1" style="font-size:1.2rem;">&lt;bottom&gt;</a>
 `;
@@ -179,6 +179,8 @@ $(function () {
         button{height: 44px;}
         input[type="text"]{height: 44px;box-sizing: border-box;}
         select{height: 44px;}
+        .w-com{text-align:center;}
+        #my-name{width: 160px;}
       }
       /* 平板设备 (宽度768px到1024px) */
       @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -186,6 +188,8 @@ $(function () {
         button{height: 33px;}
         input[type="text"]{height: 33px;box-sizing: border-box;}
         select{height: 33px;}
+        .w-com{text-align:left;}
+        #my-name{width: 240px;}
       }
       /* 电脑设备 (宽度大于1024px) */
       @media only screen and (min-width: 1025px) {
@@ -193,6 +197,8 @@ $(function () {
         button{height: 22px;}
         input[type="text"]{height: 22px;box-sizing: border-box;}
         select{height: 22px;}
+        .w-com{text-align:left;}
+        #my-name{width: 240px;}
       }
 
     </style>
@@ -213,10 +219,10 @@ $(function () {
   mainCom.append(`
     <div style="padding: 2px">
         <input type="text" id="my-token" value="****" style="width: 50px; text-align: center" autocomplete="off" />
-        <button id="my-set" style="width: 80px; margin-left: 4px">Set</button>
-        <button id="my-remove" style="width: 80px; margin-left: 4px; color: #f00">Clear</button>
-        <button id="my-eid-set" style="width: 80px; margin-left: 4px">Eid-Set</button>
-        <button id="my-eid-remove" style="width: 80px; margin-left: 4px; color: #f00">Eid-Clear</button>
+        <button id="my-set" style="width: 78px; margin-left: 4px">Set</button>
+        <button id="my-remove" style="width: 78px; margin-left: 4px; color: #f00">Clear</button>
+        <button id="my-eid-set" style="width: 78px; margin-left: 4px">Eid-Set</button>
+        <button id="my-eid-remove" style="width: 78px; margin-left: 4px; color: #f00">Eid-Clear</button>
     </div>
  `);
 
