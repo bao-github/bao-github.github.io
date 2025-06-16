@@ -79,13 +79,13 @@ var ajax = async function (url, method, body) {
 
 //
 var comm_pages = `
-    <a href="#page-pos-0" style="font-size:1.2rem;">&lt;top&gt;</a>
+    <a href="#page-pos-0" style="font-size:1.2rem;">&lt;Up&gt;</a>
     |
     <a href="./index.html" style="font-size:1rem;">index</a>
     <a href="./bookmarks.html" style="font-size:1rem;">bookmarks</a>
     <a href="./admin.html" style="font-size:1rem;">admin</a>
     |
-    <a href="#page-pos-1" style="font-size:1.2rem;">&lt;bottom&gt;</a>
+    <a href="#page-pos-1" style="font-size:1.2rem;">&lt;Down&gt;</a>
 `;
 
 //
@@ -175,7 +175,7 @@ $(function () {
 
       /* 手机设备 (宽度小于768px) */
       @media only screen and (max-width: 767px) {
-        html{font-size:16px;}
+        html{font-size:18px;}
         button{height: 44px;}
         input[type="text"]{height: 44px;box-sizing: border-box;}
         select{height: 44px;}
@@ -184,7 +184,7 @@ $(function () {
       }
       /* 平板设备 (宽度768px到1024px) */
       @media only screen and (min-width: 768px) and (max-width: 1024px) {
-        html{font-size:16px;}
+        html{font-size:17px;}
         button{height: 33px;}
         input[type="text"]{height: 33px;box-sizing: border-box;}
         select{height: 33px;}
