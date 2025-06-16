@@ -79,13 +79,13 @@ var ajax = async function (url, method, body) {
 
 //
 var comm_pages = `
-    <a href="#page-pos-0" style="font-size:20px;">&lt;top&gt;</a>
+    <a href="#page-pos-0" style="font-size:1.4rem;">&lt;top&gt;</a>
     |
-    <a href="./index.html">index</a>
-    <a href="./bookmarks.html">bookmarks</a>
-    <a href="./admin.html">admin</a>
+    <a href="./index.html" style="font-size:1.2rem;">index</a>
+    <a href="./bookmarks.html" style="font-size:1.2rem;">bookmarks</a>
+    <a href="./admin.html" style="font-size:1.2rem;">admin</a>
     |
-    <a href="#page-pos-1" style="font-size:20px;">&lt;bottom&gt;</a>
+    <a href="#page-pos-1" style="font-size:1.4rem;">&lt;bottom&gt;</a>
 `;
 
 //
@@ -164,6 +164,7 @@ $(function () {
         font-family: Consolas, "Courier New", monospace;
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAqCAIAAAA8m+yHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAArSURBVEhL7csxDQAADMOw8kdbBhuGqG/8OzcwQ2bIDJmhdGCGzJAZMiPtA76GhNz8jjfAAAAAAElFTkSuQmCC');
         line-height: 21px;
+        margin: 0;
       }
       a {
         color: #00f;
@@ -171,6 +172,29 @@ $(function () {
       img {
         vertical-align: middle;
       }
+
+      /* 手机设备 (宽度小于768px) */
+      @media only screen and (max-width: 767px) {
+        html{font-size:18px;}
+        button{height: 44px;}
+        input[type="text"]{height: 44px;box-sizing: border-box;}
+        select{height: 44px;}
+      }
+      /* 平板设备 (宽度768px到1024px) */
+      @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        html{font-size:17px;}
+        button{height: 33px;}
+        input[type="text"]{height: 33px;box-sizing: border-box;}
+        select{height: 33px;}
+      }
+      /* 电脑设备 (宽度大于1024px) */
+      @media only screen and (min-width: 1025px) {
+        html{font-size:16px;}
+        button{height: 22px;}
+        input[type="text"]{height: 22px;box-sizing: border-box;}
+        select{height: 22px;}
+      }
+
     </style>
   `);
 
