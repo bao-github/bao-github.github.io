@@ -175,7 +175,7 @@ $(function () {
 
       /* 手机设备 (宽度小于768px) */
       @media only screen and (max-width: 767px) {
-        html{font-size:18px;}
+        html{font-size:16px;}
         button{height: 44px;}
         input[type="text"]{height: 44px;box-sizing: border-box;}
         select{height: 44px;}
@@ -184,7 +184,7 @@ $(function () {
       }
       /* 平板设备 (宽度768px到1024px) */
       @media only screen and (min-width: 768px) and (max-width: 1024px) {
-        html{font-size:17px;}
+        html{font-size:16px;}
         button{height: 33px;}
         input[type="text"]{height: 33px;box-sizing: border-box;}
         select{height: 33px;}
