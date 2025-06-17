@@ -79,13 +79,13 @@ var ajax = async function (url, method, body) {
 
 //
 var comm_pages = `
-    <a href="#page-pos-0" style="font-size:1.2rem;">&lt;Up&gt;</a>
+    <a href="#page-up" style="font-size:1.2rem;">&lt;Up&gt;</a>
     |
     <a href="./index.html" style="font-size:1rem;">index</a>
     <a href="./bookmarks.html" style="font-size:1rem;">bookmarks</a>
     <a href="./admin.html" style="font-size:1rem;">admin</a>
     |
-    <a href="#page-pos-1" style="font-size:1.2rem;">&lt;Down&gt;</a>
+    <a href="#page-down" style="font-size:1.2rem;">&lt;Down&gt;</a>
 `;
 
 //
@@ -213,8 +213,8 @@ $(function () {
     mainCom = main.find(".w-com"),
     mainMsg = main.find(".w-msg");
 
-  head.append('<a name="page-pos-0"></a><div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm1"></div>');
-  foot.append('<div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm2"></div><a name="page-pos-1"></a>');
+  head.append('<a name="page-up"></a><div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm1"></div>');
+  foot.append('<div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm2"></div><a name="page-down"></a>');
 
   mainCom.append(`
     <div style="padding: 2px">
@@ -243,7 +243,7 @@ $(function () {
   if (!/Android/i.test(window.navigator.userAgent)) {
     body.append(`
       <div style="position: fixed; right: 20px; bottom: 20px; width: 56px; height: 56px; z-index: 999">
-          <a href="#page-pos-0">
+          <a href="#page-up">
             <img src="./top.png" />
           </a>
       </div>
