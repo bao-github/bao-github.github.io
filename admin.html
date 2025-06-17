@@ -26,9 +26,12 @@
 
           //
           var postOne = async function () {
+            //
+            if (myName.val().trim() == "") return;
+
             maskShow();
             var postRes = await ajax(
-              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + myName.val(),
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + myName.val().trim(),
               "POST",
               //
               JSON.stringify({
@@ -49,6 +52,9 @@
 
           //
           var deleteOne = async function () {
+            //
+            if (myName.val().trim() == "") return;
+
             maskShow();
             var listRes = await ajax(
               `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents?access_token=${gitee_access_token}`,
@@ -64,14 +70,14 @@
 
               var sha = "";
               for (var i = 0; i < listRes.length; i++) {
-                if (listRes[i].name == myName.val()) {
+                if (listRes[i].name == myName.val().trim()) {
                   sha = listRes[i].sha;
                   break;
                 }
               }
 
               var deleteRes = await ajax(
-                `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + myName.val(),
+                `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + myName.val().trim(),
                 "DELETE",
                 //
                 JSON.stringify({
@@ -108,6 +114,9 @@
 
           //
           myRead.click(function () {
+            //
+            if (myTextarea.val().trim() == "") return;
+
             myPre.html(_pppp(deWordEncrypt1(decodeURIComponent(escape(myTextarea.val().trim())))));
           });
         })();
@@ -124,7 +133,7 @@
           <!--start-->
           <div style="padding: 2px">
             <div style="text-align: center">
-              <input type="text" id="my-name" style="text-align: center" />
+              <input type="text" id="my-name" placeholder="github-list-xxxx.txt" style="text-align: center" />
               <button id="my-create" style="width: 80px; margin-left: 4px">Create</button>
               <button id="my-delete" style="width: 80px; margin-left: 4px; color: #f00">Delete</button>
             </div>
