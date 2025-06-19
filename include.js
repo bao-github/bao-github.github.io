@@ -160,6 +160,11 @@ $(function () {
         width: 100%;
         tab-size: 2;
       }
+      #msg {
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
       pre {
         font-family: Consolas, "Courier New", monospace;
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAqCAIAAAA8m+yHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAArSURBVEhL7csxDQAADMOw8kdbBhuGqG/8OzcwQ2bIDJmhdGCGzJAZMiPtA76GhNz8jjfAAAAAAElFTkSuQmCC');
@@ -207,11 +212,11 @@ $(function () {
   //
   var body = $("body"),
     app = $("#app"),
+    msg = $("#msg"),
     head = app.find(".w-head"),
     foot = app.find(".w-foot"),
     main = app.find(".w-main"),
-    mainCom = main.find(".w-com"),
-    mainMsg = main.find(".w-msg");
+    mainCom = main.find(".w-com");
 
   head.append('<a name="page-up"></a><div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm1"></div>');
   foot.append('<div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm2"></div><a name="page-down"></a>');
@@ -226,8 +231,8 @@ $(function () {
     </div>
  `);
 
-  mainMsg.append(`
-    <div style="padding: 2px">
+  msg.append(`
+    <div>
         <div id="my-msg" style="color: #f00;font-size: 14px;"></div>
     </div>
  `);
