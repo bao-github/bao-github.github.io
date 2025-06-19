@@ -178,7 +178,7 @@ $(function () {
         html{font-size:18px;}
         button{height: 44px;}
         input[type="text"]{height: 44px;box-sizing: border-box;}
-        select{height: 44px;}
+        select{height: 44px;font-size:16px;}
         .w-com{text-align:center;}
         #my-name{width: 160px;}
       }
@@ -187,7 +187,7 @@ $(function () {
         html{font-size:17px;}
         button{height: 33px;}
         input[type="text"]{height: 33px;box-sizing: border-box;}
-        select{height: 33px;}
+        select{height: 33px;font-size:15px;}
         .w-com{text-align:left;}
         #my-name{width: 240px;}
       }
@@ -196,7 +196,7 @@ $(function () {
         html{font-size:16px;}
         button{height: 22px;}
         input[type="text"]{height: 22px;box-sizing: border-box;}
-        select{height: 22px;}
+        select{height: 22px;font-size:14px;}
         .w-com{text-align:left;}
         #my-name{width: 240px;}
       }
