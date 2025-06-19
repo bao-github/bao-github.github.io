@@ -214,14 +214,14 @@ $(function () {
     app = $("#app"),
     msg = $("#msg"),
     head = app.find(".w-head"),
-    foot = app.find(".w-foot"),
     main = app.find(".w-main"),
-    mainCom = main.find(".w-com");
+    foot = app.find(".w-foot"),
+    vcom = main.find(".w-com");
 
   head.append('<a name="page-up"></a><div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm1"></div>');
   foot.append('<div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm2"></div><a name="page-down"></a>');
 
-  mainCom.append(`
+  vcom.append(`
     <div style="padding: 2px">
         <input type="text" id="my-token" value="****" style="width: 50px; text-align: center" autocomplete="off" />
         <button id="my-set" style="width: 78px; margin-left: 4px">Set</button>
