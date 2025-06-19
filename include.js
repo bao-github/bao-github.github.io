@@ -108,16 +108,16 @@ var maskHide = function () {
   $("#my-mask").hide();
 };
 
-//
+// https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0
 var curEditor = null;
 var curEditorFlag = false;
 var genEditor = function (code) {
   const script = document.createElement("script");
-  script.src = "https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js";
+  script.src = "https://unpkg.com/monaco-editor@0.52.2/min/vs/loader.js";
   script.onload = () => {
     require.config({
       paths: {
-        vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs",
+        vs: "https://unpkg.com/monaco-editor@0.52.2/min/vs",
       },
     });
     require(["vs/editor/editor.main"], () => {
