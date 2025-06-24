@@ -17,12 +17,17 @@
           var myDelete = $("#my-delete");
 
           //
-          var myTextarea = $("#my-textarea");
-          var myRead = $("#my-read");
           var myPre = $("#my-pre");
 
+          //
           var logName = $("#log-name");
           var logShow = $("#log-show");
+          var logLeft = $("#log-left");
+          var logRight = $("#log-right");
+
+          //
+          var page = 1;
+          var per_page = 4;
 
           //
           var gitee_access_token = window.localStorage.getItem("token");
@@ -107,7 +112,7 @@
 
             maskShow();
             var logRes = await ajax(
-              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/commits?access_token=${gitee_access_token}&path=` + logName.val().trim(),
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/commits?access_token=${gitee_access_token}&page=${page}&per_page=${per_page}&path=` + logName.val().trim(),
               "GET"
               //
             );
@@ -118,12 +123,11 @@
               //
               _alert("OK LOGS");
 
-              $("#log-list").empty();
-
+              var tempLi = [];
               for (var i = 0; i < logRes.length; i++) {
                 var li = $("<li></li>");
-                li.css({ color: "#00f", padding: "2px", cursor: "pointer", "font-family": 'Consolas, "Courier New", monospace', "font-size": "14px" });
-                li.html(logRes[i].commit.message);
+                li.css({ color: "#38f", padding: "4px", cursor: "pointer", "font-family": 'Consolas, "Courier New", monospace', "font-size": "14px" });
+                li.html((page - 1) * per_page + (i + 1) + ") " + logRes[i].commit.message);
                 li.click(
                   (function (log) {
                     return function () {
@@ -131,9 +135,15 @@
                     };
                   })(logRes[i])
                 );
-                $("#log-list").append(li);
+                tempLi.push(li);
               }
+
+              $("#log-list").empty();
+              tempLi.forEach((c) => {
+                $("#log-list").append(c);
+              });
             }
+
             maskHide();
           };
 
@@ -147,8 +157,10 @@
             );
             if (getRes.message) {
               //
-              _alert("ERR GET : " + getRes.message);
+              _alert("ERR GET LOG : " + getRes.message);
             } else {
+              //
+              _alert("OK GET LOG");
               //
               if (getRes instanceof Array) {
                 myPre.html("none");
@@ -175,17 +187,28 @@
           });
 
           //
-          myRead.click(function () {
-            //
-            if (myTextarea.val().trim() == "") return;
-
-            myPre.html(_pppp(deWordEncrypt1(decodeURIComponent(escape(myTextarea.val().trim())))));
-          });
-
-          //
           logShow.click(function () {
             (async function () {
               // LOGS
+              page = 1;
+              await logList();
+            })();
+          });
+
+          //
+          logLeft.click(function () {
+            (async function () {
+              // LOGS
+              page -= 1;
+              await logList();
+            })();
+          });
+
+          //
+          logRight.click(function () {
+            (async function () {
+              // LOGS
+              page += 1;
               await logList();
             })();
           });
@@ -212,14 +235,13 @@
             <div style="text-align: center">
               <input type="text" id="log-name" placeholder="github-list-xxxx.txt" style="text-align: center" />
               <button id="log-show" style="width: 80px; margin-left: 4px">Show</button>
-              <div id="log-list"></div>
-            </div>
-            <div style="padding: 2px">
-              <textarea id="my-textarea" rows="10" style="white-space: normal"></textarea>
-            </div>
-            <div style="padding: 2px">
-              <div style="text-align: center">
-                <button id="my-read" style="width: 160px">Read</button>
+              <div>
+                <ul id="log-list" style="list-style-type: none; padding: 0; margin: 5px 0"></ul>
+              </div>
+              <div>
+                <button id="log-left" style="margin: 0 5px">&lt;</button>
+
+                <button id="log-right" style="margin: 0 5px">&gt;</button>
               </div>
             </div>
             <div style="padding: 2px">

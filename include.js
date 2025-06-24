@@ -186,7 +186,7 @@ $(function () {
         input[type="text"]{height: 44px;box-sizing: border-box;}
         select{height: 44px;font-size:16px;}
         .w-com{text-align:center;}
-        #my-name{width: 160px;}
+        #my-name,#log-name{width: 160px;}
       }
       /* 平板设备 (宽度768px到1024px) */
       @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -195,7 +195,7 @@ $(function () {
         input[type="text"]{height: 33px;box-sizing: border-box;}
         select{height: 33px;font-size:15px;}
         .w-com{text-align:left;}
-        #my-name{width: 240px;}
+        #my-name,#log-name{width: 240px;}
       }
       /* 电脑设备 (宽度大于1024px) */
       @media only screen and (min-width: 1025px) {
@@ -204,7 +204,7 @@ $(function () {
         input[type="text"]{height: 22px;box-sizing: border-box;}
         select{height: 22px;font-size:14px;}
         .w-com{text-align:left;}
-        #my-name{width: 240px;}
+        #my-name,#log-name{width: 240px;}
       }
 
     </style>
