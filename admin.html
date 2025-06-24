@@ -35,11 +35,12 @@
           //
           var postOne = async function () {
             //
-            if (myName.val().trim() == "") return;
+            var tmpMyName = myName.val().trim();
+            if (tmpMyName == "") return;
 
             maskShow();
             var postRes = await ajax(
-              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + myName.val().trim(),
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + tmpMyName,
               "POST",
               //
               JSON.stringify({
@@ -61,7 +62,8 @@
           //
           var deleteOne = async function () {
             //
-            if (myName.val().trim() == "") return;
+            var tmpMyName = myName.val().trim();
+            if (tmpMyName == "") return;
 
             maskShow();
             var listRes = await ajax(
@@ -78,14 +80,14 @@
 
               var sha = "";
               for (var i = 0; i < listRes.length; i++) {
-                if (listRes[i].name == myName.val().trim()) {
+                if (listRes[i].name == tmpMyName) {
                   sha = listRes[i].sha;
                   break;
                 }
               }
 
               var deleteRes = await ajax(
-                `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + myName.val().trim(),
+                `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + tmpMyName,
                 "DELETE",
                 //
                 JSON.stringify({
@@ -108,11 +110,12 @@
           //
           var logList = async function () {
             //
-            if (logName.val().trim() == "") return;
+            var tmpLogName = logName.val().trim();
+            if (tmpLogName == "") return;
 
             maskShow();
             var logRes = await ajax(
-              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/commits?access_token=${gitee_access_token}&page=${page}&per_page=${per_page}&path=` + logName.val().trim(),
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/commits?access_token=${gitee_access_token}&page=${page}&per_page=${per_page}&path=` + tmpLogName,
               "GET"
               //
             );
@@ -131,7 +134,7 @@
                 li.click(
                   (function (log) {
                     return function () {
-                      getOne(logName.val().trim(), log.sha);
+                      getOne(tmpLogName, log.sha);
                     };
                   })(logRes[i])
                 );
