@@ -213,7 +213,7 @@ $(function () {
         outline: none;
         color: #000000;
         border-radius: 4px;
-        border: 1px solid #dcdfe6;          
+        border: 1px solid #999999;          
       }
 
       input[type="text"]:focus-visible {
@@ -225,7 +225,7 @@ $(function () {
         outline: none;
         color: #000000;
         border-radius: 4px;
-        border: 1px solid #dcdfe6;
+        border: 1px solid #999999;
       }
 
       select:focus-visible {
@@ -237,7 +237,7 @@ $(function () {
         outline: none;
         color: #000000;
         border-radius: 4px;
-        border: 1px solid #dcdfe6;
+        border: 1px solid #999999;
       }
 
       textarea:focus-visible {
