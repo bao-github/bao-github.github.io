@@ -291,9 +291,9 @@ $(function () {
     <div style="padding: 2px">
         <input type="text" id="my-token" value="****" style="width: 50px; text-align: center" autocomplete="off" />
         <button id="my-set" style="width: 78px; margin-left: 4px">Set</button>
-        <button id="my-remove" style="width: 78px; margin-left: 4px; color: #f00">Clear</button>
+        <button id="my-remove" style="width: 78px; margin-left: 4px">Clear</button>
         <button id="my-eid-set" style="width: 78px; margin-left: 4px">Eid-Set</button>
-        <button id="my-eid-remove" style="width: 78px; margin-left: 4px; color: #f00">Eid-Clear</button>
+        <button id="my-eid-remove" style="width: 78px; margin-left: 4px">Eid-Clear</button>
     </div>
  `);
 
