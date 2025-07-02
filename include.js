@@ -173,7 +173,10 @@ $(function () {
         margin: 0;
       }
       a {
-        color: #00f;
+        color: #0077ff;
+      }
+      a:hover {
+        color: #ff3434;
       }
       img {
         vertical-align: middle;
