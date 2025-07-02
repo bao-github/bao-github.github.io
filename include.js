@@ -178,6 +178,66 @@ $(function () {
       img {
         vertical-align: middle;
       }
+        
+      button {
+        cursor: pointer;
+        color: #ffffff;
+        outline: none;
+        border-radius: 4px;
+        border: 2px solid #409eff;
+        background-color: #409eff;
+      }
+
+      button:hover {
+        border-color: #79bbff;
+        background-color: #79bbff;
+      }
+
+      button:focus-visible {
+        outline: 2px solid #a0cfff;
+        outline-offset: 1px;
+      }
+
+      button:active {
+        border-color: #337ecc;
+        background-color: #337ecc;
+      }
+
+      input[type="text"] {
+        padding: 2px;
+        outline: none;
+        color: #000000;
+        border-radius: 4px;
+        border: 1px solid #dcdfe6;          
+      }
+
+      input[type="text"]:focus-visible {
+          border: 1px solid #409eff;
+      }
+
+      select {
+        padding: 1px;
+        outline: none;
+        color: #000000;
+        border-radius: 4px;
+        border: 1px solid #dcdfe6;
+      }
+
+      select:focus-visible {
+        border: 1px solid #409eff;
+      }
+
+      textarea {
+        padding: 1px;
+        outline: none;
+        color: #000000;
+        border-radius: 4px;
+        border: 1px solid #dcdfe6;
+      }
+
+      textarea:focus-visible {
+        border: 1px solid #409eff;
+      }
 
       /* 手机设备 (宽度小于768px) */
       @media only screen and (max-width: 767px) {
