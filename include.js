@@ -180,9 +180,9 @@ $(function () {
       }
         
       button {
+        outline: none;
         cursor: pointer;
         color: #ffffff;
-        outline: none;
         border-radius: 4px;
         border: 2px solid #409eff;
         background-color: #409eff;
@@ -201,6 +201,11 @@ $(function () {
       button:active {
         border-color: #337ecc;
         background-color: #337ecc;
+      }
+
+      button:disabled {
+        border-color: #a0cfff;
+        background-color: #a0cfff;
       }
 
       input[type="text"] {
