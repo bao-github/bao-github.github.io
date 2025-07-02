@@ -128,16 +128,20 @@
 
               var tempLi = [];
               for (var i = 0; i < logRes.length; i++) {
-                var li = $("<li></li>");
-                li.css({ color: "#38f", padding: "4px", cursor: "pointer", "font-family": 'Consolas, "Courier New", monospace', "font-size": "14px" });
-                li.html((page - 1) * per_page + (i + 1) + ") " + logRes[i].commit.message);
-                li.click(
+                var at = $("<a></a>");
+                at.attr("href", "javascript:;");
+                at.css({ "font-size": "1rem" });
+                at.html((page - 1) * per_page + (i + 1) + ") " + logRes[i].commit.message);
+                at.click(
                   (function (log) {
                     return function () {
                       getOne(tmpLogName, log.sha);
                     };
                   })(logRes[i])
                 );
+                var li = $("<li></li>");
+                li.css({ padding: "4px" });
+                li.append(at);
                 tempLi.push(li);
               }
 
@@ -242,8 +246,8 @@
                 <ul id="log-list" style="list-style-type: none; padding: 0; margin: 4px 0"></ul>
               </div>
               <div>
-                <button id="log-left" style="width: 30px;margin: 0 2px">&lt;</button>
-                <button id="log-right" style="width: 30px;margin: 0 2px">&gt;</button>
+                <button id="log-left" style="width: 30px; margin: 0 2px">&lt;</button>
+                <button id="log-right" style="width: 30px; margin: 0 2px">&gt;</button>
               </div>
             </div>
             <div style="padding: 2px">
