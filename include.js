@@ -234,6 +234,7 @@ $(function () {
         background-repeat: no-repeat;
         background-position: right 5px center;
         padding-right: 30px;
+        padding-left: 5px;
       }
 
       select:focus-visible {
