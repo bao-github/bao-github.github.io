@@ -120,6 +120,11 @@ var genEditor = function (code) {
         vs: "https://unpkg.com/monaco-editor@0.52.2/min/vs",
       },
     });
+    require.config({
+      "vs/nls": {
+        availableLanguages: { "*": "zh-cn" },
+      },
+    });
     require(["vs/editor/editor.main"], () => {
       curEditor = monaco.editor.create(document.getElementById("my-editor"), {
         value: code,
