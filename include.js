@@ -127,10 +127,11 @@ var genEditor = function (code) {
     });
     require(["vs/editor/editor.main"], () => {
       curEditor = monaco.editor.create(document.getElementById("my-editor"), {
+        language: "plaintext",
         value: code,
         theme: "vs",
-        language: "plaintext",
         automaticLayout: true,
+        tabSize: 2,
       });
     });
   };
