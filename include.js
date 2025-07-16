@@ -293,8 +293,8 @@ $(function () {
     foot = app.find(".w-foot"),
     vcom = main.find(".w-com");
 
-  head.append('<a name="page-up"></a><div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm1"></div>');
-  foot.append('<div style="padding: 2px; font-size: 16px; text-align: center" id="my-comm2"></div><a name="page-down"></a>');
+  head.append('<a name="page-up"></a><div style="padding: 8px 1px; font-size: 16px; text-align: center" id="my-comm1"></div>');
+  foot.append('<div style="padding: 8px 1px; font-size: 16px; text-align: center" id="my-comm2"></div><a name="page-down"></a>');
 
   vcom.append(`
     <div style="padding: 2px">
