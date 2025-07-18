@@ -149,6 +149,7 @@ $(function () {
       }
       body {
         margin: 0;
+        background: #f0f0f0;
       }
       #app {
         padding: 5px;
