@@ -91,6 +91,14 @@ var comm_pages = `
 //
 var _alert = function (text) {
   var d = $("<div></div>");
+  d.css({
+    padding: "2px 10px",
+    background: "rgba(0, 0, 0, 0.5)",
+    color: "#fff",
+    margin: "2px",
+    borderRadius: "10px",
+    fontSize: "12px",
+  });
   d.html(text);
   $("#my-msg").append(d);
   setTimeout(function () {
