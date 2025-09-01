@@ -117,7 +117,26 @@
               //
               var data = deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content))));
               myTextarea.val(data);
-              myPre.html(_pppp(data));
+              //
+              if (path == "github-list-password.txt") {
+                var b = _pppp(data).split("\n");
+                var d = [];
+                for (var i = 0; i < b.length; i++) {
+                  var c = b[i].split("：");
+                  if (c.length == 2) {
+                    var s = "";
+                    if (c[0].startsWith("-")) {
+                      s = "rm";
+                    }
+                    d.push(`<div class="${s}"><span>${c[0]}</span><span>：</span><span>${c[1]}</span></div>`);
+                  } else {
+                    d.push(`<div>&nbsp;</div>`);
+                  }
+                }
+                myPre.html(d.join(""));
+              } else {
+                myPre.html(_pppp(data));
+              }
               viewMode();
             }
             maskHide();
@@ -222,6 +241,12 @@
         })();
       });
     </script>
+    <style type="text/css">
+      .rm {
+        text-decoration: line-through;
+        color: #ccc;
+      }
+    </style>
   </head>
 
   <body>
