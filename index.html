@@ -124,11 +124,18 @@
                 for (var i = 0; i < b.length; i++) {
                   var c = b[i].split("：");
                   if (c.length == 2) {
-                    var s = "";
+                    var s1 = "";
+                    var s2 = "";
                     if (c[0].startsWith("-")) {
-                      s = "rm";
+                      s1 = "rm";
+                    } else if (c[0].startsWith("+")) {
+                      s2 = "iv";
+                    } else if (c[0].startsWith("!")) {
+                      s2 = "ik";
+                    } else {
+                      s2 = "im";
                     }
-                    d.push(`<div class="${s}"><span>${c[0]}</span><span>：</span><span>${c[1]}</span></div>`);
+                    d.push(`<div class="${s1}"><span class="it">${c[0]}</span><span>：</span><span class="${s2}">${c[1]}</span></div>`);
                   } else {
                     d.push(`<div>&nbsp;</div>`);
                   }
@@ -244,7 +251,31 @@
     <style type="text/css">
       .rm {
         text-decoration: line-through;
-        color: #ccc;
+        color: #999;
+      }
+      .it {
+        display: inline-block;
+        padding: 0 2px;
+        min-width: 85px;
+        text-align: center;
+      }
+      .im {
+        color: #fff;
+        background: #ab8787;
+        border-radius: 5px;
+        padding: 0 5px;
+      }
+      .iv {
+        color: #fff;
+        background: #729775;
+        border-radius: 5px;
+        padding: 0 5px;
+      }
+      .ik {
+        color: #fff;
+        background: #c677d3;
+        border-radius: 5px;
+        padding: 0 5px;
       }
     </style>
   </head>
