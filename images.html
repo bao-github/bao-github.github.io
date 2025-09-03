@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>images</title>
+    <script src="./jquery-3.5.1.min.js"></script>
+    <script src="./aes-3.1.2.js"></script>
+    <script src="./include.js"></script>
+    <script type="text/javascript">
+      //
+      $(function () {
+        //
+        (async function () {
+          //
+          var imgBox = $("#img-box");
+          var imgFile = $("#img-file");
+          var imgSelect = $("#img-select");
+
+          //
+          var gitee_access_token = window.localStorage.getItem("token");
+
+          //
+          var fmtData = function (b) {
+            //
+            var ul = imgBox.find("ul");
+            ul.empty();
+            //
+            for (var i = 0; i < b.length; i++) {
+              fmtDataOne(b[i]);
+            }
+          };
+
+          //
+          var fmtDataOne = function (c) {
+            //
+            var ul = imgBox.find("ul");
+            //
+            var li = $("<li>");
+            //
+            var img = $("<img />");
+            img.attr("src", `https://gitee.com/api/v5/repos/${__owner}/${__repo}/raw/${c.name}?access_token=${gitee_access_token}`);
+            var btn = $("<a>");
+            btn.attr("href", "javascript:;");
+            btn.attr("data-sha", c.sha);
+            btn.css({ "font-size": "12px", display: "block", "text-align": "center" });
+            btn.html("delete");
+            btn.click(
+              (function (_c, _li) {
+                return async function () {
+                  //
+                  await deleteOne(_c);
+                  //
+                  _li.remove();
+                };
+              })(c, li)
+            );
+            //
+            li.append(img);
+            li.append(btn);
+            //
+            ul.append(li);
+          };
+
+          //
+          var deleteOne = async function (c) {
+            maskShow();
+            var deleteRes = await ajax(
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/` + c.name,
+              "DELETE",
+              //
+              JSON.stringify({
+                access_token: gitee_access_token,
+                sha: c.sha,
+                message: "delete-" + new Date().toLocaleString(),
+              })
+            );
+            if (deleteRes.message) {
+              //
+              _alert("ERR DELETE : " + deleteRes.message);
+            } else {
+              //
+              _alert("OK DELETE");
+            }
+            maskHide();
+          };
+
+          //
+          var postOne = async function (base64) {
+            maskShow();
+            var postRes = await ajax(
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/github-image-` + new Date().getTime(),
+              "POST",
+              //
+              JSON.stringify({
+                access_token: gitee_access_token,
+                content: base64,
+                message: "insert-" + new Date().toLocaleString(),
+              })
+            );
+            if (postRes.message) {
+              //
+              _alert("ERR POST : " + postRes.message);
+            } else {
+              //
+              _alert("OK POST");
+
+              //
+              fmtDataOne({
+                name: postRes.content.name,
+                sha: postRes.content.sha,
+              });
+            }
+            maskHide();
+          };
+
+          //
+          var getList = async function () {
+            maskShow();
+            var listRes = await ajax(
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents?access_token=${gitee_access_token}`,
+              "GET"
+              //
+            );
+            if (listRes.message) {
+              //
+              _alert("ERR LIST : " + listRes.message);
+            } else {
+              //
+              _alert("OK LIST");
+
+              //
+              var optionArray = [];
+              for (var i = 0; i < listRes.length; i++) {
+                var tempName = listRes[i].name;
+                var tempSha = listRes[i].sha;
+                var isSelect = false;
+                if (tempName.startsWith("github-image")) {
+                  optionArray.push({
+                    name: tempName,
+                    sha: tempSha,
+                  });
+                }
+              }
+              //
+              fmtData(optionArray);
+            }
+            maskHide();
+          };
+
+          // List
+          await getList();
+
+          //
+          imgSelect.click(function () {
+            imgFile.click();
+          });
+
+          //
+          imgFile.change(function () {
+            var file = $(this)[0].files[0];
+            if (!file) {
+              return;
+            }
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              postOne(e.target.result.split(",")[1] + "\n");
+            };
+            reader.readAsDataURL(file);
+          });
+        })();
+      });
+    </script>
+    <style type="text/css">
+      #img-box ul {
+        padding: 0;
+        list-style-type: none;
+        overflow: hidden;
+      }
+      #img-box ul li {
+        float: left;
+        padding: 2px;
+      }
+      #img-box ul li img {
+        max-height: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="w-head"></div>
+      <div class="w-main">
+        <div class="w-com"></div>
+        <div>
+          <!--start-->
+          <div style="padding: 2px">
+            <div id="img-box">
+              <ul></ul>
+            </div>
+          </div>
+          <div style="padding: 2px">
+            <input id="img-file" type="file" style="display: none" />
+            <button id="img-select" style="width: 60px">Select</button>
+          </div>
+          <!--end-->
+        </div>
+      </div>
+      <div class="w-foot"></div>
+    </div>
+    <div id="msg"></div>
+  </body>
+</html>
