@@ -55,6 +55,36 @@
           };
 
           //
+          var fmtData = function (path, data) {
+            if (path == "github-list-password.txt") {
+              var b = _pppp(data).split("\n");
+              var d = [];
+              for (var i = 0; i < b.length; i++) {
+                var c = b[i].split("：");
+                if (c.length == 2) {
+                  var s1 = "";
+                  var s2 = "";
+                  if (c[0].startsWith("-")) {
+                    s1 = "rm";
+                  } else if (c[0].startsWith("+")) {
+                    s2 = "iv";
+                  } else if (c[0].startsWith("!")) {
+                    s2 = "ik";
+                  } else {
+                    s2 = "im";
+                  }
+                  d.push(`<div class="${s1}"><span class="it">${c[0]}</span><span>：</span><span class="${s2}">${c[1]}</span></div>`);
+                } else {
+                  d.push(`<div>&nbsp;</div>`);
+                }
+              }
+              return d.join("");
+            } else {
+              return _pppp(data);
+            }
+          };
+
+          //
           var getList = async function () {
             maskShow();
             var listRes = await ajax(
@@ -117,33 +147,7 @@
               //
               var data = deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content))));
               myTextarea.val(data);
-              //
-              if (path == "github-list-password.txt") {
-                var b = _pppp(data).split("\n");
-                var d = [];
-                for (var i = 0; i < b.length; i++) {
-                  var c = b[i].split("：");
-                  if (c.length == 2) {
-                    var s1 = "";
-                    var s2 = "";
-                    if (c[0].startsWith("-")) {
-                      s1 = "rm";
-                    } else if (c[0].startsWith("+")) {
-                      s2 = "iv";
-                    } else if (c[0].startsWith("!")) {
-                      s2 = "ik";
-                    } else {
-                      s2 = "im";
-                    }
-                    d.push(`<div class="${s1}"><span class="it">${c[0]}</span><span>：</span><span class="${s2}">${c[1]}</span></div>`);
-                  } else {
-                    d.push(`<div>&nbsp;</div>`);
-                  }
-                }
-                myPre.html(d.join(""));
-              } else {
-                myPre.html(_pppp(data));
-              }
+              myPre.html(fmtData(path, data));
               viewMode();
             }
             maskHide();
@@ -183,7 +187,7 @@
               //
               var data = myTextarea.val();
               myTextarea.val(data);
-              myPre.html(_pppp(data));
+              myPre.html(fmtData(path, data));
               viewMode();
             }
             maskHide();
