@@ -86,10 +86,10 @@
           };
 
           //
-          var postOne = async function (base64) {
+          var postOne = async function (base64, fext) {
             maskShow();
             var postRes = await ajax(
-              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/github-image-` + new Date().getTime(),
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/github-image-` + new Date().getTime() + fext,
               "POST",
               //
               JSON.stringify({
@@ -164,7 +164,7 @@
             }
             var reader = new FileReader();
             reader.onload = function (e) {
-              postOne(e.target.result.split(",")[1] + "\n");
+              postOne(e.target.result.split(",")[1], file.name.substring(file.name.lastIndexOf(".")));
             };
             reader.readAsDataURL(file);
           });
