@@ -14,6 +14,7 @@
         (async function () {
           //
           var imgBox = $("#img-box");
+          var imgDsc = $("#img-dsc");
           var imgFile = $("#img-file");
           var imgSelect = $("#img-select");
 
@@ -21,7 +22,20 @@
           var gitee_access_token = window.localStorage.getItem("token");
 
           //
-          var fmtData = function (b) {
+          var convertToBase64 = async function (url) {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            return new Promise(function (resolve, reject) {
+              const reader = new FileReader();
+              reader.onloadend = function () {
+                resolve(reader.result);
+              };
+              reader.readAsDataURL(blob);
+            });
+          };
+
+          //
+          var fmtDataArr = function (b) {
             //
             var ul = imgBox.find("ul");
             ul.empty();
@@ -40,6 +54,13 @@
             //
             var img = $("<img />");
             img.attr("src", `https://gitee.com/api/v5/repos/${__owner}/${__repo}/raw/${c.name}?access_token=${gitee_access_token}`);
+            img.click(
+              (function (_c) {
+                return async function () {
+                  imgDsc.attr("src", await convertToBase64(`https://gitee.com/api/v5/repos/${__owner}/${__repo}/raw/${_c.name}?access_token=${gitee_access_token}`));
+                };
+              })(c)
+            );
             var btn = $("<a>");
             btn.attr("href", "javascript:;");
             btn.attr("data-sha", c.sha);
@@ -143,7 +164,7 @@
                 }
               }
               //
-              fmtData(optionArray);
+              fmtDataArr(optionArray);
             }
             maskHide();
           };
@@ -198,6 +219,9 @@
             <div id="img-box">
               <ul></ul>
             </div>
+          </div>
+          <div style="padding: 2px">
+            <img id="img-dsc" src="" />
           </div>
           <div style="padding: 2px">
             <input id="img-file" type="file" style="display: none" />
