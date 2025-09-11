@@ -272,7 +272,8 @@ $(function () {
       @media only screen and (max-width: 767px) {
         html{font-size:18px;}
         button{height: 44px;}
-        input[type="text"]{height: 44px;box-sizing: border-box;}
+        input[type="text"],
+        input[type="datetime-local"]{height: 44px;box-sizing: border-box;}
         select{height: 44px;font-size:16px;}
         .w-com{text-align:center;}
         #my-name,#log-name{width: 160px;}
@@ -281,7 +282,8 @@ $(function () {
       @media only screen and (min-width: 768px) and (max-width: 1024px) {
         html{font-size:17px;}
         button{height: 33px;}
-        input[type="text"]{height: 33px;box-sizing: border-box;}
+        input[type="text"],
+        input[type="datetime-local"]{height: 33px;box-sizing: border-box;}
         select{height: 33px;font-size:15px;}
         .w-com{text-align:left;}
         #my-name,#log-name{width: 240px;}
@@ -290,7 +292,8 @@ $(function () {
       @media only screen and (min-width: 1025px) {
         html{font-size:16px;}
         button{height: 22px;}
-        input[type="text"]{height: 22px;box-sizing: border-box;}
+        input[type="text"],
+        input[type="datetime-local"]{height: 22px;box-sizing: border-box;}
         select{height: 22px;font-size:14px;}
         .w-com{text-align:left;}
         #my-name,#log-name{width: 240px;}
