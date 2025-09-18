@@ -13,19 +13,11 @@
         //
         (async function () {
           //
-          var iptStart = $("#ipt-start");
-          var iptEnd = $("#ipt-end");
-          var iptRet = $("#ipt-ret");
-          var btnCalc = $("#btn-calc");
+          var btnDev = $("#btn-dev");
 
           //
-          var getHoursDiff = function (time1, time2) {
-            return Math.abs(new Date(time2) - new Date(time1)) / (1000 * 60 * 60);
-          };
-
-          //
-          btnCalc.click(function () {
-            iptRet.val(getHoursDiff(iptStart.val(), iptEnd.val()));
+          btnDev.click(function () {
+            alert("dev");
           });
         })();
       });
@@ -41,22 +33,7 @@
           <!--start-->
           <div style="padding: 2px">
             <div style="text-align: center">
-              <input type="datetime-local" id="ipt-start" />
-            </div>
-          </div>
-          <div style="padding: 2px">
-            <div style="text-align: center">
-              <input type="datetime-local" id="ipt-end" />
-            </div>
-          </div>
-          <div style="padding: 2px">
-            <div style="text-align: center">
-              <input type="text" id="ipt-ret" style="width: 100px" readonly />
-            </div>
-          </div>
-          <div style="padding: 2px">
-            <div style="text-align: center">
-              <button id="btn-calc" style="width: 60px">Calc</button>
+              <button id="btn-dev" style="width: 60px">Dev</button>
             </div>
           </div>
           <!--end-->
