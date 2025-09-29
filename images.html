@@ -51,6 +51,7 @@
             var ul = imgBox.find("ul");
             //
             var li = $("<li>");
+
             //
             var img = $("<img />");
             img.attr("src", `https://gitee.com/api/v5/repos/${__owner}/${__repo}/raw/${c.name}?access_token=${gitee_access_token}`);
@@ -61,6 +62,14 @@
                 };
               })(c)
             );
+
+            //
+            var dwn = $("<a>");
+            dwn.attr("href", `https://gitee.com/api/v5/repos/${__owner}/${__repo}/raw/${c.name}?access_token=${gitee_access_token}`);
+            dwn.css({ "font-size": "12px", display: "block", "text-align": "center" });
+            dwn.html("download");
+
+            //
             var btn = $("<a>");
             btn.attr("href", "javascript:;");
             btn.attr("data-sha", c.sha);
@@ -76,9 +85,12 @@
                 };
               })(c, li)
             );
+
             //
             li.append(img);
+            li.append(dwn);
             li.append(btn);
+
             //
             ul.append(li);
           };
