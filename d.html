@@ -20,6 +20,11 @@
             alert("dev");
           });
         })();
+
+        // init
+        var t = navigator.userAgent;
+        t += "<br />" + navigator.language;
+        $("#my-agent").html(t);
       });
     </script>
   </head>
@@ -34,6 +39,9 @@
           <div style="padding: 2px">
             <div style="text-align: center">
               <button id="btn-dev" style="width: 60px">Dev</button>
+            </div>
+            <div style="text-align: center">
+              <pre id="my-agent" style="font-size: 15px; overflow: auto"></pre>
             </div>
           </div>
           <!--end-->
