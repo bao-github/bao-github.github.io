@@ -131,7 +131,7 @@
                 var at = $("<a></a>");
                 at.attr("href", "javascript:;");
                 at.css({ "font-size": "1rem" });
-                at.html((page - 1) * per_page + (i + 1) + ") " + logRes[i].commit.message);
+                at.html((page - 1) * per_page + i + ") " + logRes[i].commit.author.date);
                 at.click(
                   (function (log) {
                     return function () {
