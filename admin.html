@@ -24,10 +24,14 @@
           var logShow = $("#log-show");
           var logLeft = $("#log-left");
           var logRight = $("#log-right");
+          var logComp = $("#log-comp");
 
           //
           var page = 1;
           var per_page = 10;
+
+          //
+          var myDiff = null;
 
           //
           var gitee_access_token = window.localStorage.getItem("token");
@@ -139,8 +143,12 @@
                     };
                   })(logRes[i])
                 );
+                var se = $('<input type="checkbox"/>');
+                se.attr("name", "comp");
+                se.attr("data-sha", logRes[i].sha);
                 var li = $("<li></li>");
                 li.css({ padding: "4px" });
+                li.append(se);
                 li.append(at);
                 tempLi.push(li);
               }
@@ -176,6 +184,36 @@
               }
             }
             maskHide();
+          };
+
+          //
+          var getCom = async function (path, ref) {
+            var getRes = await ajax(
+              `https://gitee.com/api/v5/repos/${__owner}/${__repo}/contents/${path}?ref=${ref}&access_token=${gitee_access_token}`,
+              "GET"
+              //
+            );
+            if (getRes.message) {
+              //
+              _alert("ERR GET LOG : " + getRes.message);
+            } else {
+              //
+              _alert("OK GET LOG");
+              //
+              if (getRes instanceof Array) {
+                return "none";
+              } else {
+                return _pppp(deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content)))));
+              }
+            }
+          };
+
+          //
+          var setModel = function (a, b) {
+            myDiff.setModel({
+              original: monaco.editor.createModel(a, "text/plain"),
+              modified: monaco.editor.createModel(b, "text/plain"),
+            });
           };
 
           //
@@ -219,6 +257,55 @@
               await logList();
             })();
           });
+
+          //
+          logComp.click(function () {
+            (async function () {
+              //
+              var tmpLogName = logName.val().trim();
+              if (tmpLogName == "") return;
+              //
+              let values = [];
+              //
+              $("input[name='comp']:checked").each(function () {
+                values.push($(this).attr("data-sha"));
+              });
+              //
+              if (values.length == 2) {
+                var v_new = await getCom(tmpLogName, values[0]);
+                var v_old = await getCom(tmpLogName, values[1]);
+                if (myDiff == null) {
+                  let script = document.createElement("script");
+                  script.src = "https://unpkg.com/monaco-editor@0.52.2/min/vs/loader.js";
+                  script.onload = () => {
+                    require.config({
+                      paths: {
+                        vs: "https://unpkg.com/monaco-editor@0.52.2/min/vs",
+                      },
+                    });
+                    require.config({
+                      "vs/nls": {
+                        availableLanguages: { "*": "zh-cn" },
+                      },
+                    });
+                    require(["vs/editor/editor.main"], () => {
+                      myDiff = monaco.editor.createDiffEditor(document.getElementById("my-editor"), {
+                        language: "plaintext",
+                        theme: "vs-dark",
+                        automaticLayout: true,
+                        tabSize: 2,
+                        originalEditable: true,
+                      });
+                      setModel(v_old, v_new);
+                    });
+                  };
+                  document.head.appendChild(script);
+                } else {
+                  setModel(v_old, v_new);
+                }
+              }
+            })();
+          });
         })();
       });
     </script>
@@ -245,9 +332,12 @@
               <div>
                 <ul id="log-list" style="list-style-type: none; padding: 0; margin: 4px 0"></ul>
               </div>
-              <div>
+              <div style="padding: 2px">
                 <button id="log-left" style="width: 30px; margin: 0 2px">&lt;</button>
                 <button id="log-right" style="width: 30px; margin: 0 2px">&gt;</button>
+              </div>
+              <div style="padding: 2px">
+                <button id="log-comp">comp</button>
               </div>
             </div>
             <div style="padding: 2px">
@@ -262,6 +352,11 @@
             </div>
             <div style="padding: 2px">
               <pre id="my-pre" style="font-size: 15px"></pre>
+            </div>
+            <div style="padding: 2px">
+              <div>
+                <div id="my-editor" style="width: 100%; height: 514px; border: 1px solid #4c4d4f; box-sizing: border-box; border-radius: 4px; overflow: hidden"></div>
+              </div>
             </div>
           </div>
           <!--end-->
