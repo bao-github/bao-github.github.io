@@ -203,7 +203,7 @@
               if (getRes instanceof Array) {
                 return "none";
               } else {
-                return _pppp(deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content)))));
+                return deWordEncrypt1(decodeURIComponent(escape(atob(getRes.content))));
               }
             }
           };
@@ -337,7 +337,7 @@
                 <button id="log-right" style="width: 30px; margin: 0 2px">&gt;</button>
               </div>
               <div style="padding: 2px">
-                <button id="log-comp">comp</button>
+                <button id="log-comp">compare</button>
               </div>
             </div>
             <div style="padding: 2px">

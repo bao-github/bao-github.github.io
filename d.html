@@ -13,17 +13,22 @@
         //
         (async function () {
           //
-          var btnDev = $("#btn-dev");
-
-          //
-          btnDev.click(function () {
-            alert("dev");
-          });
         })();
-
-        // init
-        var t = navigator.userAgent;
-        t += "<br />" + navigator.language;
+        //
+        var w = window.screen;
+        var t = "";
+        t += `【navigator.userAgent:${navigator.userAgent}】`;
+        t += "<br />";
+        t += `【navigator.language:${navigator.language}】`;
+        t += "<br />";
+        t += `【navigator.languages:${navigator.languages.join(",")}】`;
+        t += "<br />";
+        t += `【width:${w.width},height:${w.height}】【availWidth:${w.availWidth},availHeight:${w.availHeight}】`;
+        t += "<br />";
+        t += `【colorDepth:${w.colorDepth},pixelDepth:${w.pixelDepth}】`;
+        t += "<br />";
+        t += `【innerWidth:${window.innerWidth},innerHeight:${window.innerHeight}】`;
+        //
         $("#my-agent").html(t);
       });
     </script>
@@ -37,9 +42,6 @@
         <div>
           <!--start-->
           <div style="padding: 2px">
-            <div style="text-align: center">
-              <button id="btn-dev" style="width: 60px">Dev</button>
-            </div>
             <div style="text-align: center">
               <pre id="my-agent" style="font-size: 15px; overflow: auto"></pre>
             </div>
