@@ -84,20 +84,23 @@
         //
         $("#my-agent").html(t);
         //
+        var __t = null;
+        //
         $("#my-btn01").click(function () {
           //
-          var w = window.open("https://cn.bing.com/", "_blank");
-          setInterval(() => {
-            if (w && !w.closed) {
+          var __w = window.open("https://cn.bing.com/", "_blank");
+          if (__t != null) {
+            clearInterval(__t);
+          }
+          __t = setInterval(() => {
+            if (__w && !__w.closed) {
               //
               var g6_1 = g1[g3(0, g1.length - 1)] + g2[g3(0, g2.length - 1)];
               var g5_1 = "https://cn.bing.com/search?q=" + encodeURIComponent(g6_1) + "&qs=n&form=QBRE";
               //
               try {
-                w.location.href = g5_1;
-              } catch (e) {
-                alert("catch");
-              }
+                __w.location.href = g5_1;
+              } catch (e) {}
             }
           }, 6000);
         });
