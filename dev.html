@@ -89,6 +89,9 @@
         $("#my-btn01").click(function () {
           //
           var __w = window.open("https://cn.bing.com/", "_blank");
+          //
+          var __i = 0;
+          //
           if (__t != null) {
             clearInterval(__t);
           }
@@ -99,10 +102,15 @@
               var g5_1 = "https://cn.bing.com/search?q=" + encodeURIComponent(g6_1) + "&qs=n&form=QBRE";
               //
               try {
+                //
+                __i++;
+                //
+                if (__i % 5 == 0) {
+                  g5_1 = "https://bao-github.github.io/dev.html?t=" + new Date().getTime();
+                  clearInterval(__t);
+                }
                 __w.location.href = g5_1;
               } catch (e) { }
-            } else {
-              alert((__w == null || typeof __w === 'undefined') ? 'k' : 'not k');
             }
           }, 8000);
         });
