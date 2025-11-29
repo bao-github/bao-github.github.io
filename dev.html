@@ -88,13 +88,14 @@
         //
         $("#my-btn01").click(function () {
           //
-          var __w = window.open("https://cn.bing.com/", "_blank");
-          //
-          var __i = 0;
-          //
           if (__t != null) {
             clearInterval(__t);
           }
+          //
+          var __m = g1[g3(0, g1.length - 1)] + g2[g3(0, g2.length - 1)];
+          var __w = window.open("https://cn.bing.com/search?q=" + encodeURIComponent(__m) + "&qs=n&form=QBRE", "_blank");
+          var __i = 1;
+          //
           __t = setInterval(() => {
             if (__w && !__w.closed) {
               //
@@ -105,9 +106,9 @@
                 //
                 __i++;
                 //
-                if (__i % 5 == 0) {
-                  g5_1 = "https://bao-github.github.io/dev.html?t=" + new Date().getTime();
+                if (__i % 6 == 0) {
                   clearInterval(__t);
+                  g5_1 = "https://bao-github.github.io/dev.html?t=" + new Date().getTime();
                 }
                 __w.location.href = g5_1;
               } catch (e) { }
