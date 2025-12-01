@@ -9,6 +9,8 @@
     <script src="./include.js"></script>
     <script type="text/javascript">
       //
+      //
+      //
       let g1 = (
         "北京市东城区,北京市西城区,北京市朝阳区,北京市丰台区,北京市石景山区,北京市海淀区,北京市门头沟区,北京市房山区,北京市通州区,北京市顺义区,北京市昌平区,北京市大兴区,北京市怀柔区,北京市平谷区,北京市密云区,北京市延庆区," +
         "天津市和平区,天津市河东区,天津市河西区,天津市南开区,天津市河北区,天津市红桥区,天津市东丽区,天津市西青区,天津市津南区,天津市北辰区,天津市武清区,天津市宝坻区,天津市滨海新区,天津市宁河区,天津市静海区,天津市蓟州区," +
@@ -50,39 +52,50 @@
       let g3 = function (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       };
+      let g9 = function () {
+        return g1[g3(0, g1.length - 1)] + g2[g3(0, g2.length - 1)];
+      };
+      //
+      //
       //
       $(function () {
         //
+        //
+        //
         (async function () {
           //
-          let g4 = [];
-          let g5 = "";
-          let g6 = "";
-          for (let i = 0; i < 50; i++) {
-            g6 = g1[g3(0, g1.length - 1)] + g2[g3(0, g2.length - 1)];
-            g5 = "https://cn.bing.com/search?q=" + encodeURIComponent(g6) + "&qs=n&form=QBRE";
-            g4.push(`<a href="${g5}" target="_blank">${i + 1}.${g6}</a>`);
-            g4.push(`<br />`);
-          }
-          //
-          $("#my-micro").html(g4.join(""));
         })();
         //
-        var w = window.screen;
-        var t = "";
-        t += `【navigator.userAgent:${navigator.userAgent}】`;
-        t += "<br />";
-        t += `【navigator.language:${navigator.language}】`;
-        t += "<br />";
-        t += `【navigator.languages:${navigator.languages.join(",")}】`;
-        t += "<br />";
-        t += `【width:${w.width},height:${w.height}】【availWidth:${w.availWidth},availHeight:${w.availHeight}】`;
-        t += "<br />";
-        t += `【colorDepth:${w.colorDepth},pixelDepth:${w.pixelDepth}】`;
-        t += "<br />";
-        t += `【innerWidth:${window.innerWidth},innerHeight:${window.innerHeight}】`;
         //
-        $("#my-agent").html(t);
+        //
+        let g4 = [];
+        let g5 = "";
+        let g6 = "";
+        for (let i = 0; i < 50; i++) {
+          g6 = g9();
+          g5 = "https://cn.bing.com/search?q=" + encodeURIComponent(g6) + "&qs=n&form=QBRE";
+          g4.push(`<a href="${g5}" target="_blank">${i + 1}.${g6}</a><br />`);
+        }
+        $("#my-micro").html(g4.join(""));
+        //
+        //
+        //
+        var ws = window.screen;
+        var ts = "";
+        ts += `${navigator.userAgent}`;
+        ts += "<br />";
+        ts += `${navigator.language}`;
+        ts += "<br />";
+        ts += `${navigator.languages.join(",")}`;
+        ts += "<br />";
+        ts += `width:${ws.width},height:${ws.height},availWidth:${ws.availWidth},availHeight:${ws.availHeight}`;
+        ts += "<br />";
+        ts += `colorDepth:${ws.colorDepth},pixelDepth:${ws.pixelDepth}`;
+        ts += "<br />";
+        ts += `innerWidth:${window.innerWidth},innerHeight:${window.innerHeight}`;
+        $("#my-agent").html(ts);
+        //
+        //
         //
         var __t = null;
         //
@@ -92,27 +105,25 @@
             clearInterval(__t);
           }
           //
-          var __m = g1[g3(0, g1.length - 1)] + g2[g3(0, g2.length - 1)];
-          var __w = window.open("https://cn.bing.com/search?q=" + encodeURIComponent(__m) + "&qs=n&form=QBRE", "_blank");
+          var __w = window.open("https://cn.bing.com/search?q=" + encodeURIComponent(g9()) + "&qs=n&form=QBRE", "_blank");
           var __i = 1;
           //
           __t = setInterval(() => {
             if (__w && !__w.closed) {
               //
-              var g6_1 = g1[g3(0, g1.length - 1)] + g2[g3(0, g2.length - 1)];
-              var g5_1 = "https://cn.bing.com/search?q=" + encodeURIComponent(g6_1) + "&qs=n&form=QBRE";
+              var g8 = "https://cn.bing.com/search?q=" + encodeURIComponent(g9()) + "&qs=n&form=QBRE";
               //
               try {
                 //
                 if (__i % 6 == 0) {
                   clearInterval(__t);
-                  g5_1 = "https://bao-github.github.io/dev.html?t=" + new Date().getTime();
+                  g8 = "https://bao-github.github.io/dev.html?t=" + new Date().getTime();
                 }
                 //
                 __i++;
                 //
-                __w.location.href = g5_1;
-              } catch (e) { }
+                __w.location.href = g8;
+              } catch (e) {}
             }
           }, 8000);
         });
@@ -140,7 +151,7 @@
               <pre id="my-agent" style="font-size: 15px; overflow: auto"></pre>
             </div>
             <div style="text-align: center">
-              <button id="my-btn01">RRR</button>
+              <button id="my-btn01">Bing</button>
             </div>
             <div style="text-align: center">
               <div id="my-micro"></div>
