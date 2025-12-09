@@ -5,24 +5,55 @@
 // @description  s-1
 // @match        *://*/*
 // @run-at       document-start
-// @grant        none
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
 
 (function () {
-  "use strict";
+    "use strict";
 
-  (function () {
-    const proto = Node.prototype;
-    const origAppend = proto.appendChild;
+    (function () {
+        const origAppend = Node.prototype.appendChild;
 
-    proto.appendChild = function (node) {
-      const src = node.src || (node.getAttribute && node.getAttribute("src"));
+        Node.prototype.appendChild = function (node) {
+            return origAppend.call(this, node);
+        };
 
-      if (src.indexOf("common/openjs/openBox.js") > -1) {
-        return node;
-      } else {
-        return origAppend.call(this, node);
-      }
-    };
-  })();
+        function createPanel() {
+
+            const panel = document.createElement('div');
+            panel.style.position = "fixed";
+            panel.style.top = "10px";
+            panel.style.right = "10px";
+            panel.style.background = "white";
+            panel.style.border = "1px solid #ccc";
+            panel.style.padding = "5px";
+            panel.style.zIndex = "9999";
+            panel.style.boxShadow = "0 0 10px rgba(0,0,0,0.2)";
+
+            const input = document.createElement('input');
+            input.type = "text";
+            input.value = GM_getValue("myKeyword", "");
+            input.style.width = "50px";
+            input.style.marginRight = "5px";
+
+            const btn = document.createElement('button');
+            btn.textContent = "S";
+            btn.style.padding = "0 5px";
+            btn.addEventListener('click', function() {
+                GM_setValue("myKeyword", input.value.trim());
+            });
+
+            panel.appendChild(input);
+            panel.appendChild(btn);
+
+            document.body.appendChild(panel);
+        }
+
+
+        window.addEventListener('DOMContentLoaded', createPanel);
+
+
+
+    })();
 })();
