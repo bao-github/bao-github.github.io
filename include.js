@@ -184,6 +184,7 @@ $(function () {
         font-family: Consolas, "Courier New", monospace;
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAqCAIAAAA8m+yHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAArSURBVEhL7csxDQAADMOw8kdbBhuGqG/8OzcwQ2bIDJmhdGCGzJAZMiPtA76GhNz8jjfAAAAAAElFTkSuQmCC');
         line-height: 21px;
+        color: #000;
         tab-size: 2;
         margin: 0;
       }
@@ -232,6 +233,7 @@ $(function () {
         color: #000000;
         border-radius: 4px;
         border: 1px solid #999999;          
+        background: #fff;
       }
 
       input[type="text"]:focus-visible {
@@ -244,6 +246,7 @@ $(function () {
         color: #000000;
         border-radius: 4px;
         border: 1px solid #999999;
+        background: #fff;
         appearance: none;
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23999'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
         background-repeat: no-repeat;
@@ -301,6 +304,25 @@ $(function () {
 
     </style>
   `);
+
+  if (!/Android/i.test(window.navigator.userAgent)) {
+    $("head").append(`
+      <style type="text/css">
+        body {
+          background: #212121;
+        }
+        input[type="text"],select {
+          background: #303030;
+          border: 1px solid #303030;
+          color: #afafaf;
+        }
+        pre {
+          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAqCAYAAACz+XvQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIj48dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCjw/eHBhY2tldCBlbmQ9J3cnPz4slJgLAAAAPUlEQVRIS+3VoQEAIAzEQMomv0H3Xw48NnXk5IvYr+4+a9B+B8ogZ5AzyBnkPgxWEk+KMcgZ5AxyBrnx4AUTSwNEGkUOyQAAAABJRU5ErkJggg==');
+          color: #afafaf;
+        }
+      </style>
+    `);
+  }
 
   //
   var body = $("body"),
