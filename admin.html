@@ -251,6 +251,7 @@
             })();
           });
 
+          //
           var appcmd = window.localStorage.getItem("appcmd");
           if (appcmd != null) {
             cmdTxt.val(appcmd);
@@ -345,8 +346,12 @@
             <div style="text-align: center">
               <input type="text" id="log-name" placeholder="github-list-xxxx.txt" style="text-align: center" />
               <button id="log-show" style="width: 80px; margin-left: 4px">Show</button>
-              <div>
-                <ul id="log-list" style="list-style-type: none; padding: 0; margin: 4px 0"></ul>
+            </div>
+          </div>
+          <div style="padding: 2px">
+            <div style="text-align: center">
+              <div style="padding: 2px">
+                <ul id="log-list" style="list-style-type: none; padding: 0; margin: 0"></ul>
               </div>
               <div style="padding: 2px">
                 <button id="log-left" style="width: 30px; margin: 0 2px">&lt;</button>
@@ -356,8 +361,12 @@
                 <button id="log-comp">compare</button>
               </div>
               <div style="padding: 2px">
-                <input type="text" id="cmd-txt" style="text-align: center" />
-                <button id="cmd-btn" style="width: 80px; margin-left: 4px">Cmd</button>
+                <div style="padding: 2px">
+                  <textarea id="cmd-txt" style="width: 200px"></textarea>
+                </div>
+                <div style="padding: 2px">
+                  <button id="cmd-btn" style="width: 80px; margin-left: 4px">Cmd</button>
+                </div>
               </div>
             </div>
             <div style="padding: 2px">
@@ -371,11 +380,13 @@
               </div>
             </div>
             <div style="padding: 2px">
-              <pre id="my-pre" style="font-size: 15px"></pre>
+              <div>
+                <pre id="my-pre" style="font-size: 15px"></pre>
+              </div>
             </div>
             <div style="padding: 2px">
               <div>
-                <div id="my-editor" style="width: 100%; height: 514px; border: 1px solid #4c4d4f; box-sizing: border-box; border-radius: 4px; overflow: hidden"></div>
+                <div id="my-editor" style="width: 100%; height: 400px; border: 1px solid #4c4d4f; box-sizing: border-box; border-radius: 4px; overflow: hidden"></div>
               </div>
             </div>
           </div>
