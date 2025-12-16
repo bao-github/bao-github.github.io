@@ -328,6 +328,12 @@ $(function () {
           background: #303030;
           color: #afafaf;
         }
+        a {
+          color: #69afff;
+        }
+        a:hover {
+          color: #ff6767;
+        }
       </style>
     `);
   }
