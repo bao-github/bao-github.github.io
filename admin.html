@@ -27,6 +27,10 @@
           var logComp = $("#log-comp");
 
           //
+          var cmdTxt = $("#cmd-txt");
+          var cmdBtn = $("#cmd-btn");
+
+          //
           var page = 1;
           var per_page = 10;
 
@@ -241,6 +245,18 @@
           });
 
           //
+          cmdBtn.click(function () {
+            (async function () {
+              window.localStorage.setItem("appcmd", cmdTxt.val());
+            })();
+          });
+
+          var appcmd = window.localStorage.getItem("appcmd");
+          if (appcmd != null) {
+            cmdTxt.val(appcmd);
+          }
+
+          //
           logLeft.click(function () {
             (async function () {
               // LOGS
@@ -338,6 +354,10 @@
               </div>
               <div style="padding: 2px">
                 <button id="log-comp">compare</button>
+              </div>
+              <div style="padding: 2px">
+                <input type="text" id="cmd-txt" style="text-align: center" />
+                <button id="cmd-btn" style="width: 80px; margin-left: 4px">Cmd</button>
               </div>
             </div>
             <div style="padding: 2px">

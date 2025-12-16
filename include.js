@@ -305,7 +305,14 @@ $(function () {
     </style>
   `);
 
-  if (!/Android/i.test(window.navigator.userAgent)) {
+  //
+  var appcmd = window.localStorage.getItem("appcmd");
+  var preset = [];
+  if (appcmd != null) {
+    preset = appcmd.split(",");
+  }
+
+  if (preset.filter((c) => c == "dark:1").length > 0) {
     $("head").append(`
       <style type="text/css">
         body {
