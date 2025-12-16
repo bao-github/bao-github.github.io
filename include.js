@@ -165,12 +165,17 @@ $(function () {
       }
       #app textarea {
         font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        border: 1px solid #999999;
         box-sizing: border-box;
         white-space: nowrap;
+        background: #fff;
+        border-radius: 4px;
         line-height: 22px;
+        color: #000000;
         font-size: 20px;
         overflow: auto;
         outline: none;
+        padding: 1px;
         resize: none;
         width: 100%;
         tab-size: 2;
@@ -259,15 +264,7 @@ $(function () {
         border: 1px solid #409eff;
       }
 
-      textarea {
-        padding: 1px;
-        outline: none;
-        color: #000000;
-        border-radius: 4px;
-        border: 1px solid #999999;
-      }
-
-      textarea:focus-visible {
+      #app textarea:focus-visible {
         border: 1px solid #409eff;
       }
 
@@ -325,6 +322,10 @@ $(function () {
         }
         pre {
           background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAqCAYAAACz+XvQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIj48dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCjw/eHBhY2tldCBlbmQ9J3cnPz4slJgLAAAAPUlEQVRIS+3VoQEAIAzEQMomv0H3Xw48NnXk5IvYr+4+a9B+B8ogZ5AzyBnkPgxWEk+KMcgZ5AxyBrnx4AUTSwNEGkUOyQAAAABJRU5ErkJggg==');
+          color: #afafaf;
+        }
+        #app textarea {
+          background: #303030;
           color: #afafaf;
         }
       </style>
