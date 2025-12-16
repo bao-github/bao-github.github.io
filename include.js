@@ -241,10 +241,6 @@ $(function () {
         background: #fff;
       }
 
-      input[type="text"]:focus-visible {
-          border: 1px solid #409eff;
-      }
-
       select {
         padding: 1px;
         outline: none;
@@ -258,6 +254,10 @@ $(function () {
         background-position: right 5px center;
         padding-right: 30px;
         padding-left: 5px;
+      }
+
+      input[type="text"]:focus-visible {
+        border: 1px solid #409eff;
       }
 
       select:focus-visible {
