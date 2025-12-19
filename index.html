@@ -64,16 +64,17 @@
                 if (c.length == 2) {
                   var s1 = "";
                   var s2 = "";
-                  if (c[0].startsWith("-")) {
+                  var c1 = c[0];
+                  if (c1.startsWith("-")) {
                     s1 = "rm";
-                  } else if (c[0].startsWith("+")) {
+                    c1 = c1.substr(1);
+                  } else if (c1.startsWith("+")) {
                     s2 = "iv";
-                  } else if (c[0].startsWith("!")) {
-                    s2 = "ik";
+                    c1 = c1.substr(1);
                   } else {
                     s2 = "im";
                   }
-                  d.push(`<div class="${s1}"><span class="it">${c[0]}</span><span>：</span><span class="${s2}">${c[1]}</span></div>`);
+                  d.push(`<div class="${s1}"><span class="it">${c1}</span><span>：</span><span class="${s2}">${c[1]}</span></div>`);
                 } else {
                   d.push(`<div>&nbsp;</div>`);
                 }
@@ -272,12 +273,6 @@
       .iv {
         color: #fff;
         background: #729775;
-        border-radius: 5px;
-        padding: 0 5px;
-      }
-      .ik {
-        color: #fff;
-        background: #c677d3;
         border-radius: 5px;
         padding: 0 5px;
       }
