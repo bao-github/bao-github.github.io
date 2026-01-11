@@ -47,7 +47,7 @@
       let g2 = (
         "美食,旅游,游玩,空气,风景,小吃,度假,景点,野餐,露营,登山,温泉,海鲜,烧烤,采摘,古镇,咖啡,甜品,农家乐,漂流,烧烤,小吃街,糖葫芦,臭豆腐,农家菜,柴火饭,景区,特色,建筑,桥梁,出行,特产,小吃,地标,公园,博物馆,餐厅,夜市,特色菜,潜水,骑行,购物,商圈,免税店,手工艺品,酒吧,咖啡馆,夜市,主题乐园,地铁,公交,自驾路线,骑行路线,夜景,摄影,亲子游,网红打卡地," +
         //
-        "滑雪,自驾,民宿,日落,徒步,摄影,夜市,果汁,冰淇淋,火锅,景点,人口,面积,河流,位置"
+        "滑雪,自驾,民宿,日落,徒步,摄影,夜市,果汁,冰淇淋,火锅,景点,人口,面积,河流,位置,海拔,网约车,共享单车,事业编,公务员,医院,幼儿园,大学,气候,列车时刻,消费水平"
       ).split(",");
       let g3 = function (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -125,18 +125,10 @@
                 __w.location.href = g8;
               } catch (e) {}
             }
-          }, 8000);
+          }, 8500);
         });
       });
     </script>
-    <style type="text/css">
-      #my-micro a {
-        all: initial;
-        color: revert;
-        cursor: pointer;
-        text-decoration: underline;
-      }
-    </style>
   </head>
 
   <body>
@@ -151,10 +143,12 @@
               <pre id="my-agent" style="font-size: 15px; overflow: auto"></pre>
             </div>
             <div style="text-align: center">
-              <button id="my-btn01">Bing</button>
+              <div style="padding: 10px">
+                <button id="my-btn01">Bing</button>
+              </div>
             </div>
             <div style="text-align: center">
-              <div id="my-micro"></div>
+              <div id="my-micro" style="font-size: 15px; text-decoration: underline"></div>
             </div>
           </div>
           <!--end-->

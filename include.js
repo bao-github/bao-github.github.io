@@ -165,12 +165,17 @@ $(function () {
       }
       #app textarea {
         font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        border: 1px solid #999999;
         box-sizing: border-box;
         white-space: nowrap;
+        background: #fff;
+        border-radius: 4px;
         line-height: 22px;
+        color: #000000;
         font-size: 20px;
         overflow: auto;
         outline: none;
+        padding: 1px;
         resize: none;
         width: 100%;
         tab-size: 2;
@@ -184,6 +189,7 @@ $(function () {
         font-family: Consolas, "Courier New", monospace;
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAqCAIAAAA8m+yHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAArSURBVEhL7csxDQAADMOw8kdbBhuGqG/8OzcwQ2bIDJmhdGCGzJAZMiPtA76GhNz8jjfAAAAAAElFTkSuQmCC');
         line-height: 21px;
+        color: #000;
         tab-size: 2;
         margin: 0;
       }
@@ -232,10 +238,7 @@ $(function () {
         color: #000000;
         border-radius: 4px;
         border: 1px solid #999999;          
-      }
-
-      input[type="text"]:focus-visible {
-          border: 1px solid #409eff;
+        background: #fff;
       }
 
       select {
@@ -244,6 +247,7 @@ $(function () {
         color: #000000;
         border-radius: 4px;
         border: 1px solid #999999;
+        background: #fff;
         appearance: none;
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23999'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
         background-repeat: no-repeat;
@@ -252,19 +256,15 @@ $(function () {
         padding-left: 5px;
       }
 
+      input[type="text"]:focus-visible {
+        border: 1px solid #409eff;
+      }
+
       select:focus-visible {
         border: 1px solid #409eff;
       }
 
-      textarea {
-        padding: 1px;
-        outline: none;
-        color: #000000;
-        border-radius: 4px;
-        border: 1px solid #999999;
-      }
-
-      textarea:focus-visible {
+      #app textarea:focus-visible {
         border: 1px solid #409eff;
       }
 
@@ -301,6 +301,42 @@ $(function () {
 
     </style>
   `);
+
+  //
+  var appcmd = window.localStorage.getItem("appcmd");
+  var preset = [];
+  if (appcmd != null) {
+    preset = appcmd.split(",");
+  }
+
+  if (preset.filter((c) => c == "dark:1").length > 0) {
+    $("head").append(`
+      <style type="text/css">
+        body {
+          background: #212121;
+        }
+        input[type="text"],select {
+          background: #303030;
+          border: 1px solid #303030;
+          color: #afafaf;
+        }
+        pre {
+          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAqCAYAAACz+XvQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIj48dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCjw/eHBhY2tldCBlbmQ9J3cnPz4slJgLAAAAPUlEQVRIS+3VoQEAIAzEQMomv0H3Xw48NnXk5IvYr+4+a9B+B8ogZ5AzyBnkPgxWEk+KMcgZ5AxyBrnx4AUTSwNEGkUOyQAAAABJRU5ErkJggg==');
+          color: #afafaf;
+        }
+        #app textarea {
+          background: #303030;
+          color: #afafaf;
+        }
+        a {
+          color: #69afff;
+        }
+        a:hover {
+          color: #ff6767;
+        }
+      </style>
+    `);
+  }
 
   //
   var body = $("body"),
