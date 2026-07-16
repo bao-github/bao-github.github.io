@@ -371,6 +371,9 @@ $(function () {
         <div style="position: absolute; top: 120px; left: 50%; margin-left: -45px; font-size: 0; border-radius: 4px; overflow: hidden">
             <img src="./loading.gif" />
         </div>
+        <div style="position: absolute; top: 220px; left: 50%; margin-left: -45px; text-align: center; width: 90px">
+            <a href="javascript:;" id="my-qux">Cancel</a>
+        </div>
     </div>
  `);
 
@@ -386,6 +389,10 @@ $(function () {
 
   $("#my-comm1").append(comm_pages);
   $("#my-comm2").append(comm_pages);
+
+  $("#my-qux").click(function () {
+    maskHide();
+  });
 
   $("#my-set").click(function () {
     window.localStorage.setItem("token", "eabe0f21c0655c4a9e8e145c81a6" + $("#my-token").val());
