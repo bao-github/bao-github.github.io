@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         copy
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Copy table column data to clipboard with a button
 // @match        *://*/*
 // @updateURL    https://bao-github.github.io/copy.user.js
@@ -84,13 +84,13 @@
 
         // Create a copy button for each column
         const btn = document.createElement("button");
-        btn.innerText = "📋";
+        btn.innerText = "";
         btn.style.cssText = `
           position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;
-          border:none;background:#007bff;color:#fff;border-radius:3px;cursor:pointer;opacity:0.2;
+          border:none;background:#007bff;color:#fff;border-radius:3px;cursor:pointer;opacity:0.3;
         `;
         btn.onmouseover = () => (btn.style.opacity = "1");
-        btn.onmouseout = () => (btn.style.opacity = "0.2");
+        btn.onmouseout = () => (btn.style.opacity = "0.3");
         btn.onclick = (ev) => {
           // Prevent the click event from propagating to the table row
           ev.stopPropagation();
