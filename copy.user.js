@@ -2,7 +2,7 @@
 // @name         copy
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  Copy text from the page
+// @description  Copy table column data to clipboard with a button
 // @match        *://*/*
 // @run-at       document-idle
 // ==/UserScript==
@@ -55,20 +55,32 @@
   };
 
   var injectTableCopyButtons = function () {
+    // Select all tables on the page
     const tables = document.querySelectorAll("table");
 
+    // For each table, inject copy buttons for each column
     tables.forEach((table) => {
       // Check if the copy buttons have already been injected for this table
-      if (table.dataset.colCopyInjected) return;
+      if (table.dataset.colCopyInjected) {
+        return;
+      }
       table.dataset.colCopyInjected = "1";
 
+      // Get all rows of the table
       const trs = Array.from(table.querySelectorAll("tr"));
-      if (trs.length === 0) return;
+      if (trs.length === 0) {
+        return;
+      }
+
+      // Get the first row to determine the number of columns
       const firstTr = trs[0];
       const firstCells = Array.from(firstTr.querySelectorAll("th, td"));
 
+      // For each cell in the first row, create a copy button
       firstCells.forEach((cell, colIdx) => {
+        // Set the position of the cell to relative to position the button correctly
         cell.style.position = "relative";
+
         // Create a copy button for each column
         const btn = document.createElement("button");
         btn.innerText = "📋";
@@ -85,6 +97,7 @@
           const colData = [];
           // Collect data from the specific column
           trs.forEach((tr) => {
+            // Get all cells in the current row
             const tds = Array.from(tr.querySelectorAll("td"));
             const targetCell = tds[colIdx];
             if (targetCell) {
@@ -97,6 +110,7 @@
           // Write the collected data to the clipboard
           writeToClipboard(colData.join("\n"));
         };
+        // Append the copy button to the cell
         cell.appendChild(btn);
       });
     });
