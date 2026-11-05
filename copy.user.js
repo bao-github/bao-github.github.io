@@ -4,6 +4,7 @@
 // @version      0.1
 // @description  Copy table column data to clipboard with a button
 // @match        *://*/*
+// @updateURL    https://bao-github.github.io/copy.user.js
 // @run-at       document-idle
 // ==/UserScript==
 
