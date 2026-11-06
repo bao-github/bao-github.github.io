@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         copy
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  Copy table column data to clipboard with a button
 // @match        *://*/*
 // @updateURL    https://bao-github.github.io/copy.user.js
@@ -131,4 +131,17 @@
       injectTableCopyButtons();
     }
   });
+
+  let _cnt = 0;
+  let _run = function () {
+    setTimeout(() => {
+      // Initial injection of copy buttons for existing tables
+      injectTableCopyButtons();
+      _cnt++;
+      if (_cnt < 3) {
+        _run();
+      }
+    }, 2000);
+  };
+  _run();
 })();
