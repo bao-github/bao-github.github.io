@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         copy
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @description  Copy table column data to clipboard with a button
 // @match        *://*/*
 // @updateURL    https://bao-github.github.io/copy.user.js
@@ -12,7 +12,7 @@
 (function () {
   "use strict";
 
-  var showFloatingBox = function (e) {
+  const showFloatingBox = function (e) {
     let t = document.getElementById("floatingBox");
     (null === t
       ? (((t = document.createElement("div")).id = "floatingBox"),
@@ -37,7 +37,7 @@
       }, 2e3));
   };
 
-  var writeToClipboard = async function (e) {
+  const writeToClipboard = async function (e) {
     try {
       if (navigator.clipboard && window.isSecureContext) (await navigator.clipboard.writeText(e), showFloatingBox("已复制"));
       else {
@@ -56,7 +56,7 @@
     }
   };
 
-  var injectTableCopyButtons = function () {
+  const injectTableCopyButtons = function () {
     // Select all tables on the page
     const tables = document.querySelectorAll("table");
 
@@ -78,6 +78,16 @@
       const firstTr = trs[0];
       const firstCells = Array.from(firstTr.querySelectorAll("th, td"));
 
+      let chk;
+
+      if (firstCells.length > 0) {
+        chk = document.createElement("input");
+        chk.type = "checkbox";
+        chk.style.cssText = `
+          position:absolute;z-index:10;top:8px;right:8px;width:16px;height:16px;opacity:0.3;
+        `;
+      }
+
       // For each cell in the first row, create a copy button
       firstCells.forEach((cell, colIdx) => {
         // Set the position of the cell to relative to position the button correctly
@@ -87,7 +97,7 @@
         const btn = document.createElement("button");
         btn.innerText = "";
         btn.style.cssText = `
-          position:absolute;top:2px;right:2px;width:16px;height:16px;font-size:10px;
+          position:absolute;z-index:10;top:2px;right:2px;width:16px;height:16px;font-size:10px;
           border:none;background:#007bff;color:#fff;border-radius:3px;cursor:pointer;opacity:0.3;
         `;
         btn.onmouseover = () => (btn.style.opacity = "1");
@@ -98,11 +108,11 @@
           // Collect data from the specific column and copy to clipboard
           const colData = [];
           // Collect data from the specific column
-          trs.forEach((tr) => {
+          trs.forEach((tr, rowIdx) => {
             // Get all cells in the current row
-            const tds = Array.from(tr.querySelectorAll("td"));
+            const tds = Array.from(tr.querySelectorAll("th, td"));
             const targetCell = tds[colIdx];
-            if (targetCell) {
+            if (targetCell && ((rowIdx == 0 && chk.checked) || rowIdx != 0)) {
               // Trim the text content and replace empty strings with "-"
               const textContent = targetCell.textContent.trim();
               // If the cell is empty, use "-" instead
@@ -114,6 +124,10 @@
         };
         // Append the copy button to the cell
         cell.appendChild(btn);
+
+        if (colIdx == 0) {
+          cell.appendChild(chk);
+        }
       });
     });
   };
